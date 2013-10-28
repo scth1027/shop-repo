@@ -51,7 +51,7 @@ public class Privatkunde extends AbstractKunde
 	@Override
 	public String toString() {
 		return "Privatkunde [vorname=" + vorname + ", nachname=" + nachname
-				+ "]";
+				+ super.toString() + "]";
 	}
 	
 
