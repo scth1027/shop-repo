@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 public abstract class AbstractKunde
 {
+
+
 	//Attribute
 	private Long id;
 	private String email;
@@ -25,15 +27,17 @@ public abstract class AbstractKunde
 	private URI bestellungenUri;
 
 	//Konstruktor
-	public AbstractKunde(Long id, String email, Adresse adresse, URI bestellungenUri) 
+	public AbstractKunde(Long id, String email, Adresse adresse,
+			List<Bestellung> bestellungen, URI bestellungenUri) 
 	{
 		super();
-		this.setId(id);
-		this.setEmail(email);
-		this.setAdresse(adresse);
-		this.setBestellungenUri(bestellungenUri);
+		this.id = id;
+		this.email = email;
+		this.adresse = adresse;
+		this.bestellungen = bestellungen;
+		this.bestellungenUri = bestellungenUri;
 	}
-
+	
 	//Getter & Setter
 	public Long getId() 
 	{
