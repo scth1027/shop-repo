@@ -1,9 +1,14 @@
 package de.shop.kundenverwaltung.domain;
 
 import java.net.URI;
+import java.util.List;
+
+import de.shop.bestellverwaltung.domain.Bestellung;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+
 
 @XmlRootElement
 public abstract class AbstractKunde
@@ -13,9 +18,9 @@ public abstract class AbstractKunde
 	private String email;
 	private Adresse adresse;
 	
-	//@XmlTransient
-	//private List<Bestellung> bestellungen;
-	//ToDo: Klasse Bestellung muss noch angelegt werden
+	@XmlTransient
+	private List<Bestellung> bestellungen;
+
 	
 	private URI bestellungenUri;
 
