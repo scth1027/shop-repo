@@ -1,11 +1,7 @@
 package de.shop.kundenverwaltung.domain;
 
-import java.net.URI;
-import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
-
-import de.shop.bestellverwaltung.domain.Bestellung;
 
 @XmlRootElement
 public class Firmenkunde extends AbstractKunde
