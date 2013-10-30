@@ -23,20 +23,8 @@ public abstract class AbstractKunde
 	@XmlTransient
 	private List<Bestellung> bestellungen;
 
-	
 	private URI bestellungenUri;
-
-	//Konstruktor
-	public AbstractKunde(Long id, String email, Adresse adresse,
-			List<Bestellung> bestellungen, URI bestellungenUri) 
-	{
-		super();
-		this.id = id;
-		this.email = email;
-		this.adresse = adresse;
-		this.bestellungen = bestellungen;
-		this.bestellungenUri = bestellungenUri;
-	}
+	
 	
 	//Getter & Setter
 	public Long getId() 

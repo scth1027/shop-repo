@@ -9,15 +9,7 @@ public class Adresse
 	private Long id;
 	private String plz;
 	private String ort;
-	
-	//Konstruktor
-	public Adresse(Long id, String plz, String ort) 
-	{
-		super();
-		this.id = id;
-		this.plz = plz;
-		this.ort = ort;
-	}
+	private AbstractKunde kunde;
 	
 	//Getter & Setter
 	public Long getId() 
@@ -94,6 +86,14 @@ public class Adresse
 		} else if (!plz.equals(other.plz))
 			return false;
 		return true;
+	}
+
+	public AbstractKunde getKunde() {
+		return kunde;
+	}
+
+	public void setKunde(AbstractKunde kunde) {
+		this.kunde = kunde;
 	}
 	
 	

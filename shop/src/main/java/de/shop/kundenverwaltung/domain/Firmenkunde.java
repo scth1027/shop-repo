@@ -35,14 +35,6 @@ public class Firmenkunde extends AbstractKunde
 		this.ansprechpartner = ansprechpartner;
 	}
 	
-	//Konstruktor
-	public Firmenkunde(Long id, String email, Adresse adresse,
-			List<Bestellung> bestellungen, URI bestellungenUri,
-			String firmenname, String ansprechpartner) {
-		super(id, email, adresse, bestellungen, bestellungenUri);
-		this.firmenname = firmenname;
-		this.ansprechpartner = ansprechpartner;
-	}
 
 	//Methoden
 	@Override

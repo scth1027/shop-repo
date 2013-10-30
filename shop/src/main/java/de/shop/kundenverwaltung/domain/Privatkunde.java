@@ -37,15 +37,6 @@ public class Privatkunde extends AbstractKunde
 		this.nachname = nachname;
 	}
 
-	//Konstruktor
-	public Privatkunde(Long id, String email, Adresse adresse,
-			List<Bestellung> bestellungen, URI bestellungenUri, String vorname,
-			String nachname) 
-	{
-		super(id, email, adresse, bestellungen, bestellungenUri);
-		this.vorname = vorname;
-		this.nachname = nachname;
-	}
 
 	//Methoden
 	@Override
