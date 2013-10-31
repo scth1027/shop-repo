@@ -7,6 +7,10 @@ public class Privatkunde extends AbstractKunde
 {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4638753784585279152L;
 	//Attribute
 	private String vorname;
 	private String nachname;

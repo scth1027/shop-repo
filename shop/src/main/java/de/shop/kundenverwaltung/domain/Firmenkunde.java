@@ -6,6 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Firmenkunde extends AbstractKunde
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1754258788795959211L;
 	//Attribute
 	private String firmenname;
 	private String ansprechpartner;
