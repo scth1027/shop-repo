@@ -1,57 +1,48 @@
 package de.shop.kundenverwaltung.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
-@XmlRootElement
-public class Adresse 
-{
-	//Attribute
+import javax.xml.bind.annotation.XmlTransient;
+
+/**
+ * @author <a href="mailto:Juergen.Zimmermann@HS-Karlsruhe.de">J&uuml;rgen Zimmermann</a>
+ */
+public class Adresse implements Serializable {
+	private static final long serialVersionUID = -3029272617931844501L;
 	private Long id;
 	private String plz;
 	private String ort;
+	
+	@XmlTransient
 	private AbstractKunde kunde;
 	
-	//Getter & Setter
-	public Long getId() 
-	{
+	public Long getId() {
 		return id;
 	}
-	
-	public void setId(Long id)
-	{
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getPlz()
-	{
+	public String getPlz() {
 		return plz;
 	}
-	
-	public void setPlz(String plz)
-	{
+	public void setPlz(String plz) {
 		this.plz = plz;
 	}
-	
-	public String getOrt()
-	{
+	public String getOrt() {
 		return ort;
 	}
-	
-	public void setOrt(String ort)
-	{
+	public void setOrt(String ort) {
 		this.ort = ort;
 	}
 	
-	//Methoden
-	@Override
-	public String toString() 
-	{
-		return "Adresse [id=" + id + ", plz=" + plz + ", ort=" + ort + "]";
+	public AbstractKunde getKunde() {
+		return kunde;
 	}
-
+	public void setKunde(AbstractKunde kunde) {
+		this.kunde = kunde;
+	}
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -59,10 +50,8 @@ public class Adresse
 		result = prime * result + ((plz == null) ? 0 : plz.hashCode());
 		return result;
 	}
-
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -73,30 +62,26 @@ public class Adresse
 		if (id == null) {
 			if (other.id != null)
 				return false;
-		} else if (!id.equals(other.id))
+		}
+		else if (!id.equals(other.id))
 			return false;
 		if (ort == null) {
 			if (other.ort != null)
 				return false;
-		} else if (!ort.equals(other.ort))
+		}
+		else if (!ort.equals(other.ort))
 			return false;
 		if (plz == null) {
 			if (other.plz != null)
 				return false;
-		} else if (!plz.equals(other.plz))
+		}
+		else if (!plz.equals(other.plz))
 			return false;
 		return true;
 	}
-
-	public AbstractKunde getKunde() {
-		return kunde;
+	
+	@Override
+	public String toString() {
+		return "Adresse [id=" + id + ", plz=" + plz + ", ort=" + ort + "]";
 	}
-
-	public void setKunde(AbstractKunde kunde) {
-		this.kunde = kunde;
-	}
-	
-	
-	
-	
 }

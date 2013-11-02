@@ -1,43 +1,26 @@
 package de.shop.kundenverwaltung.domain;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * @author <a href="mailto:Juergen.Zimmermann@HS-Karlsruhe.de">J&uuml;rgen Zimmermann</a>
+ */
 @XmlRootElement
-public class Privatkunde extends AbstractKunde 
-{
+public class Privatkunde extends AbstractKunde {
+	private static final long serialVersionUID = -3177911520687689458L;
 	
+	private Set<HobbyType> hobbies;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4638753784585279152L;
-	//Attribute
-	private String vorname;
-
-	
-	//Getter & Setter
-	public String getVorname()
-	{
-		return vorname;
+	public Set<HobbyType> getHobbies() {
+		return hobbies;
 	}
-	
-	public void setVorname(String vorname)
-	{
-		this.vorname = vorname;
+	public void setHobbies(Set<HobbyType> hobbies) {
+		this.hobbies = hobbies;
 	}
-
-	//Methoden
 	@Override
 	public String toString() {
-		return "Privatkunde [vorname=" + vorname 
-				+ super.toString() + "]";
+		return "Privatkunde [" + super.toString() + ", hobbies=" + hobbies + "]";
 	}
-	
-
-	
-
-
-	
-	
-
 }

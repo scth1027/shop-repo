@@ -1,8 +1,15 @@
 package de.shop.kundenverwaltung.rest;
 
+import static de.shop.util.Constants.ADD_LINK;
+import static de.shop.util.Constants.FIRST_LINK;
+import static de.shop.util.Constants.LAST_LINK;
+import static de.shop.util.Constants.REMOVE_LINK;
+import static de.shop.util.Constants.SELF_LINK;
+import static de.shop.util.Constants.UPDATE_LINK;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
+import static javax.ws.rs.core.MediaType.TEXT_XML;
 
 import java.net.URI;
 import java.util.List;
@@ -23,22 +30,20 @@ import javax.ws.rs.core.Link;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import com.sun.mail.handlers.text_xml;
-
+import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.bestellverwaltung.rest.BestellungResource;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.util.Mock;
-import de.shop.util.rest.NotFoundException;
 import de.shop.util.rest.UriHelper;
-import de.shop.util.Constants;
+import de.shop.util.rest.NotFoundException;
 
-
-
+/**
+ * @author <a href="mailto:Juergen.Zimmermann@HS-Karlsruhe.de">J&uuml;rgen Zimmermann</a>
+ */
 @Path("/kunden")
-@Produces({APPLICATION_JSON, APPLICATION_XML, TEXT_PLAIN} )
+@Produces({ APPLICATION_JSON, APPLICATION_XML + ";qs=0.75", TEXT_XML + ";qs=0.5" })
 @Consumes
-public class KundeResource 
-{
+public class KundeResource {
 	public static final String KUNDEN_ID_PATH_PARAM = "kundeId";
 	public static final String KUNDEN_NACHNAME_QUERY_PARAM = "nachname";
 	
@@ -60,58 +65,55 @@ public class KundeResource
 	
 	@GET
 	@Path("{" + KUNDEN_ID_PATH_PARAM + ":[1-9][0-9]*}")
-	public Response findKundeById (@PathParam(KUNDEN_ID_PATH_PARAM) Long id)
-	{
+	public Response findKundeById(@PathParam(KUNDEN_ID_PATH_PARAM) Long id) {
+		// TODO Anwendungskern statt Mock, Verwendung von Locale
 		final AbstractKunde kunde = Mock.findKundeById(id);
-		if (kunde == null) 
-		{
+		if (kunde == null) {
 			throw new NotFoundException("Kein Kunde mit der ID " + id + " gefunden.");
 		}
 		
 		setStructuralLinks(kunde, uriInfo);
 		
 		return Response.ok(kunde)
-                .links(getTransitionalLinks(kunde, uriInfo))
-                .build();
+                       .links(getTransitionalLinks(kunde, uriInfo))
+                       .build();
 	}
 	
-
-	public void setStructuralLinks(AbstractKunde kunde, UriInfo uriInfo) 
-	{
-	// URI fuer Bestellungen setzen
-	final URI uri = getUriBestellungen(kunde, uriInfo);
-	kunde.setBestellungenUri(uri);
+	public void setStructuralLinks(AbstractKunde kunde, UriInfo uriInfo) {
+		// URI fuer Bestellungen setzen
+		final URI uri = getUriBestellungen(kunde, uriInfo);
+		kunde.setBestellungenUri(uri);
 	}
 	
-	private URI getUriBestellungen(AbstractKunde kunde, UriInfo uriInfo) 
-	{
+	private URI getUriBestellungen(AbstractKunde kunde, UriInfo uriInfo) {
 		return uriHelper.getUri(KundeResource.class, "findBestellungenByKundeId", kunde.getId(), uriInfo);
-	}
+	}		
 	
 	public Link[] getTransitionalLinks(AbstractKunde kunde, UriInfo uriInfo) {
 		final Link self = Link.fromUri(getUriKunde(kunde, uriInfo))
-	                          //.rel(SELF_LINK)
+	                          .rel(SELF_LINK)
 	                          .build();
 		
 		final Link add = Link.fromUri(uriHelper.getUri(KundeResource.class, uriInfo))
-                             //.rel(ADD_LINK)
+                             .rel(ADD_LINK)
                              .build();
 
 		final Link update = Link.fromUri(uriHelper.getUri(KundeResource.class, uriInfo))
-                                //.rel(UPDATE_LINK)
+                                .rel(UPDATE_LINK)
                                 .build();
 
 		final Link remove = Link.fromUri(uriHelper.getUri(KundeResource.class, "deleteKunde", kunde.getId(), uriInfo))
-                                //.rel(REMOV)
+                                .rel(REMOVE_LINK)
                                 .build();
 		
 		return new Link[] { self, add, update, remove };
 	}
+
 	
-	public URI getUriKunde(AbstractKunde kunde, UriInfo uriInfo) 
-	{
+	public URI getUriKunde(AbstractKunde kunde, UriInfo uriInfo) {
 		return uriHelper.getUri(KundeResource.class, "findKundeById", kunde.getId(), uriInfo);
 	}
+
 	
 	@GET
 	public Response findKundenByNachname(@QueryParam(KUNDEN_NACHNAME_QUERY_PARAM) String nachname) {
@@ -146,17 +148,16 @@ public class KundeResource
 		}
 		
 		final Link first = Link.fromUri(getUriKunde(kunden.get(0), uriInfo))
-	                           //.rel(FIRST_LINK)
+	                           .rel(FIRST_LINK)
 	                           .build();
 		final int lastPos = kunden.size() - 1;
 		final Link last = Link.fromUri(getUriKunde(kunden.get(lastPos), uriInfo))
-                              //.rel(LAST_LINK)
+                              .rel(LAST_LINK)
                               .build();
 		
 		return new Link[] { first, last };
 	}
 	
-	/*
 	@GET
 	@Path("{id:[1-9][0-9]*}/bestellungen")
 	public Response findBestellungenByKundeId(@PathParam("id") Long kundeId) {
@@ -197,10 +198,9 @@ public class KundeResource
 		
 		return new Link[] { self, first, last };
 	}
-	*/
 	
 	@POST
-	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_PLAIN })
+	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
 	public Response createKunde(AbstractKunde kunde) {
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
@@ -210,7 +210,7 @@ public class KundeResource
 	}
 	
 	@PUT
-	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_PLAIN })
+	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
 	public void updateKunde(AbstractKunde kunde) {
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
@@ -224,6 +224,4 @@ public class KundeResource
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
 		Mock.deleteKunde(kundeId);
 	}
-	
-	
 }
