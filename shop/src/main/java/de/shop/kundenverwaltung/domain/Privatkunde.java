@@ -13,7 +13,7 @@ public class Privatkunde extends AbstractKunde
 	private static final long serialVersionUID = -4638753784585279152L;
 	//Attribute
 	private String vorname;
-	private String nachname;
+
 	
 	//Getter & Setter
 	public String getVorname()
@@ -25,22 +25,11 @@ public class Privatkunde extends AbstractKunde
 	{
 		this.vorname = vorname;
 	}
-	
-	public String getNachname()
-	{
-		return nachname;
-	}
-	
-	public void setNachname(String nachname)
-	{
-		this.nachname = nachname;
-	}
-
 
 	//Methoden
 	@Override
 	public String toString() {
-		return "Privatkunde [vorname=" + vorname + ", nachname=" + nachname
+		return "Privatkunde [vorname=" + vorname 
 				+ super.toString() + "]";
 	}
 	
