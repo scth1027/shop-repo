@@ -44,7 +44,7 @@ public abstract class AbstractKunde implements Serializable {
 		this.id = id;
 	}
 	public String getNachname() {
-		return name;
+		return nachname;
 	}
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
