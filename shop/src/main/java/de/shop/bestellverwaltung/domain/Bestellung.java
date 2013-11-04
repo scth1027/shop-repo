@@ -1,6 +1,6 @@
 package de.shop.bestellverwaltung.domain;
 
-
+import java.util.Date;
 import java.net.URI;
 import java.util.List;
 
@@ -19,7 +19,9 @@ public class Bestellung {
 	
 	//Attribute
 	private Long id;
-	private AbstractKunde kunde;
+	private de.shop.kundenverwaltung.domain.AbstractKunde kunde;
+	private Date bestelldatum;
+	private double gesamtpreis;
 	private Adresse lieferadresse;
 	private boolean status;
 	@XmlTransient
@@ -33,11 +35,23 @@ public class Bestellung {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public AbstractKunde getKunde() {
+	public de.shop.kundenverwaltung.domain.AbstractKunde getKunde() {
 		return kunde;
 	}
-	public void setKunde(AbstractKunde kunde) {
+	public void setKunde(de.shop.kundenverwaltung.domain.AbstractKunde kunde) {
 		this.kunde = kunde;
+	}
+	public Date getBestelldatum() {
+		return bestelldatum;
+	}
+	public void setBestelldatum(Date bestelldatum) {
+		this.bestelldatum = bestelldatum;
+	}
+	public double getGesamtpreis() {
+		return gesamtpreis;
+	}
+	public void setGesamtpreis(double gesamtpreis) {
+		this.gesamtpreis = gesamtpreis;
 	}
 	public Adresse getLieferadresse() {
 		return lieferadresse;
@@ -66,11 +80,13 @@ public class Bestellung {
 	
 	
 	//Konstruktor
-	public Bestellung(Long id, AbstractKunde kunde, Adresse lieferadresse, boolean status, List<Artikel> artikel,URI artikelUri) 
+	public Bestellung(Long id, AbstractKunde kunde, Date bestelldatum, double gesamtpreis, Adresse lieferadresse, boolean status, List<Artikel> artikel,URI artikelUri) 
 	{
 		super();
 		this.id = id;
 		this.kunde = kunde;
+		this.bestelldatum = bestelldatum;
+		this.gesamtpreis = gesamtpreis;
 		this.lieferadresse = lieferadresse;
 		this.status = false;
 		this.artikel=artikel;
@@ -81,7 +97,7 @@ public class Bestellung {
 	@Override
 	public String toString() 
 	{
-		return "Bestellung [id=" + id + ", kunde=" + kunde + ", lieferadresse="
+		return "Bestellung [id=" + id + ", kunde=" + kunde + ", bestelldatum=" + bestelldatum + ", gesamtpreis= " + gesamtpreis + ", lieferadresse="
 				+ lieferadresse + ", status=" + status + ", artikel=" 
 				+ artikel + ", artikelUri=" + artikelUri + "]";
 	}
