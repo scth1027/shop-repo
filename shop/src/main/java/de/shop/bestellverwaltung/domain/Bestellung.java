@@ -66,7 +66,7 @@ public class Bestellung {
 	
 	
 	//Konstruktor
-	public Bestellung(Long id, AbstractKunde kunde, Adresse lieferadresse, boolean status, List<Artikel> artikel,URI artikelUri) 
+	/* public Bestellung(Long id, AbstractKunde kunde, Adresse lieferadresse, boolean status, List<Artikel> artikel,URI artikelUri) 
 	{
 		super();
 		this.id = id;
@@ -75,7 +75,7 @@ public class Bestellung {
 		this.status = false;
 		this.artikel=artikel;
 		this.artikelUri = artikelUri;
-	}
+	} */
 	
 	//Methoden
 	@Override

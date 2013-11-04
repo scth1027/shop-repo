@@ -93,8 +93,13 @@ public final class Mock {
 
 		final Bestellung bestellung = new Bestellung();
 		bestellung.setId(id);
-		bestellung.setAusgeliefert(false);
+		bestellung.setStatus(false);
 		bestellung.setKunde(kunde);
+		final Adresse adresse = new Adresse();
+		adresse.setId(id+1);
+		adresse.setPlz("12345");
+		adresse.setOrt("Testort");
+		bestellung.setLieferadresse(adresse);
 		
 		return bestellung;
 	}
