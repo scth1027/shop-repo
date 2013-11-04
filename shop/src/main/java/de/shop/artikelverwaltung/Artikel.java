@@ -9,6 +9,7 @@ public class Artikel {
 	//Attribute
 	private Long id;
 	private String bezeichnung;
+	private Double preis;
 	private String hersteller;
 	
 	//Getter & Setter
@@ -24,6 +25,12 @@ public class Artikel {
 	public void setBezeichung(String bezeichung) {
 		this.bezeichnung = bezeichung;
 	}
+	public Double getPreis() {
+		return preis;
+	}
+	public void setPreis(Double preis) {
+		this.preis = preis;
+	}
 	public String getHersteller() {
 		return hersteller;
 	}
@@ -32,11 +39,12 @@ public class Artikel {
 	}
 	
 	//Konstruktor
-		public Artikel(Long id, String bezeichnung, String hersteller) 
+		public Artikel(Long id, String bezeichnung, Double preis, String hersteller) 
 		{
 			super();
 			this.id = id;
 			this.bezeichnung = bezeichnung;
+			this.preis = preis;
 			this.hersteller= hersteller;
 		}
 		
@@ -44,7 +52,7 @@ public class Artikel {
 		@Override
 		public String toString() 
 		{
-			return "Artikel [id=" + id + ", bezeichung=" + bezeichnung + ", hersteller="+ hersteller +"]";
+			return "Artikel [id=" + id + ", bezeichung=" + bezeichnung + ", preis=" + preis + ", hersteller="+ hersteller +"]";
 		}
 		
 		@Override
@@ -85,6 +93,4 @@ public class Artikel {
 				return false;
 			return true;
 		}
-	
-
 }
