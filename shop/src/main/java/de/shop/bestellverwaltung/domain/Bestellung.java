@@ -27,6 +27,7 @@ public class Bestellung {
 	@XmlTransient
 	private List<Artikel> artikel;
 	private URI artikelUri;
+	private URI kundeUri;
 	
 	//Getter & Setter
 	public Long getId() {
@@ -77,7 +78,12 @@ public class Bestellung {
 	public void setArtikelUri(URI artikelUri) {
 		this.artikelUri = artikelUri;
 	}
-	
+	public URI getKundeUri() {
+		return kundeUri;
+	}
+	public void setKundeUri(URI kundeUri) {
+		this.kundeUri = kundeUri;
+	}
 	
 
 	
@@ -141,4 +147,5 @@ public class Bestellung {
 			return false;
 		return true;
 	}
+	
 }
