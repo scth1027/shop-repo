@@ -64,6 +64,7 @@ public class KundeResource {
 	
 	@GET
 	@Path("{"+  KUNDEN_ID_PATH_PARAM  +":[1-9][0-9]*}")
+	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	public Response findKundeById(@PathParam(KUNDEN_ID_PATH_PARAM) Long id) {
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
 		final AbstractKunde kunde = Mock.findKundeById(id);

@@ -112,7 +112,6 @@ public final class Mock {
 	public static AbstractKunde createKunde(AbstractKunde kunde) {
 		// Neue IDs fuer Kunde und zugehoerige Adresse
 		// Ein neuer Kunde hat auch keine Bestellungen
-		final String vorname = kunde.getVorname();
 		final String nachname = kunde.getNachname();
 		kunde.setId(Long.valueOf(nachname.length()));
 		final Adresse adresse = kunde.getAdresse();
