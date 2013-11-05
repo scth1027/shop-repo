@@ -95,11 +95,16 @@ public final class Mock {
 		bestellung.setId(id);
 		bestellung.setStatus(false);
 		bestellung.setKunde(kunde);
+		//bestellung.setBestelldatum(01:01:99);
+		bestellung.setGesamtpreis(50.00);
+
 		final Adresse adresse = new Adresse();
 		adresse.setId(id+1);
 		adresse.setPlz("12345");
 		adresse.setOrt("Testort");
 		bestellung.setLieferadresse(adresse);
+
+
 		
 		return bestellung;
 	}
@@ -107,6 +112,7 @@ public final class Mock {
 	public static AbstractKunde createKunde(AbstractKunde kunde) {
 		// Neue IDs fuer Kunde und zugehoerige Adresse
 		// Ein neuer Kunde hat auch keine Bestellungen
+		final String vorname = kunde.getVorname();
 		final String nachname = kunde.getNachname();
 		kunde.setId(Long.valueOf(nachname.length()));
 		final Adresse adresse = kunde.getAdresse();
