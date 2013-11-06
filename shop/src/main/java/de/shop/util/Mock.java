@@ -1,5 +1,6 @@
 package de.shop.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -96,7 +97,9 @@ public final class Mock {
 		bestellung.setStatus(false);
 		bestellung.setKunde(kunde);
 		//bestellung.setBestelldatum(01:01:99);
-		bestellung.setGesamtpreis(50.00);
+		bestellung.setGesamtpreis(new BigDecimal("112.43"));
+		
+		
 
 		final Adresse adresse = new Adresse();
 		adresse.setId(id+1);

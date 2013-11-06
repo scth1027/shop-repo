@@ -1,6 +1,7 @@
 package de.shop.bestellverwaltung.domain;
 
 import java.util.Date;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.domain.Adresse;
-import de.shop.artikelverwaltung.Artikel;
+
 
 
 
@@ -21,12 +22,11 @@ public class Bestellung {
 	private Long id;
 	private AbstractKunde kunde;
 	private Date bestelldatum;
-	private double gesamtpreis;
+	private BigDecimal gesamtpreis;
 	private Adresse lieferadresse;
 	private boolean status;
 	@XmlTransient
-	private List<Artikel> artikel;
-	private URI artikelUri;
+	private List<Posten> posten;
 	private URI kundeUri;
 	
 	//Getter & Setter
@@ -48,10 +48,10 @@ public class Bestellung {
 	public void setBestelldatum(Date bestelldatum) {
 		this.bestelldatum = bestelldatum;
 	}
-	public double getGesamtpreis() {
+	public BigDecimal getGesamtpreis() {
 		return gesamtpreis;
 	}
-	public void setGesamtpreis(double gesamtpreis) {
+	public void setGesamtpreis(BigDecimal gesamtpreis) {
 		this.gesamtpreis = gesamtpreis;
 	}
 	public Adresse getLieferadresse() {
@@ -66,17 +66,11 @@ public class Bestellung {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public List<Artikel> getArtikel() {
-		return artikel;
+	public List<Posten> getPosten() {
+		return posten;
 	}
-	public void setArtikel(List<Artikel> artikel) {
-		this.artikel = artikel;
-	}
-	public URI getArtikelUri() {
-		return artikelUri;
-	}
-	public void setArtikelUri(URI artikelUri) {
-		this.artikelUri = artikelUri;
+	public void setPosten(List<Posten> posten) {
+		this.posten = posten;
 	}
 	public URI getKundeUri() {
 		return kundeUri;
@@ -92,8 +86,8 @@ public class Bestellung {
 	public String toString() 
 	{
 		return "Bestellung [id=" + id + ", kunde=" + kunde + ", bestelldatum=" + bestelldatum + ", gesamtpreis= " + gesamtpreis + ", lieferadresse="
-				+ lieferadresse + ", status=" + status + ", artikel=" 
-				+ artikel + ", artikelUri=" + artikelUri + "]";
+				+ lieferadresse + ", status=" + status + ", posten=" 
+				+ posten + "]";
 	}
 	
 	@Override
@@ -105,8 +99,7 @@ public class Bestellung {
 		result = prime * result + ((kunde == null) ? 0 : kunde.hashCode());
 		result = prime * result + ((lieferadresse == null) ? 0 : lieferadresse.hashCode());
 		//result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((artikel == null) ? 0 : artikel.hashCode());
-		result = prime * result + ((artikelUri == null) ? 0 : artikelUri.hashCode());
+		result = prime * result + ((posten == null) ? 0 : posten.hashCode());
 		return result;
 	}
 	
@@ -135,15 +128,10 @@ public class Bestellung {
 				return false;
 		} else if (!lieferadresse.equals(other.lieferadresse))
 			return false;
-		if (artikel == null) {
-			if (other.artikel != null)
+		if (posten == null) {
+			if (other.posten != null)
 				return false;
-		} else if (!artikel.equals(other.artikel))
-			return false;
-		if (artikelUri == null) {
-			if (other.artikelUri != null)
-				return false;
-		} else if (!artikelUri.equals(other.artikelUri))
+		} else if (!posten.equals(other.posten))
 			return false;
 		return true;
 	}
