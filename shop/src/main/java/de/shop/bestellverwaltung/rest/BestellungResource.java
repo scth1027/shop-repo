@@ -10,6 +10,9 @@ import java.net.URI;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -80,4 +83,34 @@ public class BestellungResource {
 	public URI getUriBestellung(Bestellung bestellung, UriInfo uriInfo) {
 		return uriHelper.getUri(BestellungResource.class, "findBestellungById", bestellung.getId(), uriInfo);
 	}
+	
+	@POST
+    @Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
+    @Produces
+    public Response createBestellung(Bestellung bestellung) {
+            // TODO Anwendungskern statt Mock
+            bestellung = Mock.createBestellung(bestellung);
+            return Response.created(getUriBestellung(bestellung, uriInfo))
+                            .build();
+	}
+	
+	  @DELETE
+      @Path("{id:[1-9][0-9]*}")
+      @Produces
+      public void deleteBestellung(@PathParam("id") Long bestellungId) {
+              Mock.deleteBestellung(bestellungId);
+      }
+
+
+      @PUT
+      @Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
+      @Produces
+      public void updateBestellung(Bestellung bestellung) {
+              // TODO Anwendungskern statt Mock
+              Mock.updateBestellung(bestellung);
+      }
+
+	
+	
 }
+

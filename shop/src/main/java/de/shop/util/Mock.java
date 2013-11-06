@@ -134,5 +134,27 @@ public final class Mock {
 		System.out.println("Kunde mit ID=" + kundeId + " geloescht");
 	}
 
+	public static Bestellung createBestellung(Bestellung bestellung)
+	{
+		final AbstractKunde kunde = bestellung.getKunde();
+        kunde.setId(Long.valueOf(2));
+        final BigDecimal gesamtpreis = bestellung.getGesamtpreis();
+        gesamtpreis.setScale(15);
+        
+
+		System.out.println("Neue Bestellung: " + bestellung);
+		return bestellung;
+	}
+	
+	 public static void updateBestellung(Bestellung bestellung) {
+         System.out.println("Aktualisierter Bestellung: " + bestellung);
+ }
+
+
+ public static void deleteBestellung(Long bestellungId) {
+         System.out.println("Bestellung mit ID=" + bestellungId + " geloescht");
+ }
+
+	
 	private Mock() { /**/ }
 }
