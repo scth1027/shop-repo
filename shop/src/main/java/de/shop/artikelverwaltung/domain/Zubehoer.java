@@ -1,7 +1,6 @@
 package de.shop.artikelverwaltung.domain;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 @XmlRootElement
 public class Zubehoer extends AbstractArtikel{
