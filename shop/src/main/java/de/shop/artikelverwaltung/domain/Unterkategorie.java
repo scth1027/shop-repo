@@ -79,7 +79,7 @@ public class Unterkategorie implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Unterkategorie [klassenId=" + klassenId + ", name=" + name
+		return "Unterkategorie [" + super.toString() + ",klassenId=" + klassenId + ", name=" + name
 				+ ", beschreibung=" + beschreibung + "]";
 	}
 	
