@@ -32,7 +32,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         private String name;
         private Double stueckpreis;
         private Integer bestand;
-        private Unterklasse unterkategorie;
+        private Unterkategorie unterkategorie;
         private URI bestellungenUri;
                 
         public Long getArtikelnummer() {
