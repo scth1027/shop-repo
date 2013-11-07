@@ -60,11 +60,12 @@ public final class Mock {
 		}
 		else if (artikel.getClass().equals(Zubehoer.class)) {
 			final Zubehoer zubehoerx1 = (Zubehoer) artikel;
-			zubehoerx1.setBremsverstaerker("Bremsverstaerker");
-			zubehoerx1.setTacho("Tacho");
-			zubehoerx1.setLicht("Licht");
-			zubehoerx1.setPulsmesser("Pulsmesser");
-			zubehoerx1.setFlaschenhalter("Flaschenhalter");
+			zubehoerx1.setArtikeldetails_z("Artikeldetails");
+//			zubehoerx1.setBremsverstaerker("Bremsverstaerker");
+//			zubehoerx1.setTacho("Tacho");
+//			zubehoerx1.setLicht("Licht");
+//			zubehoerx1.setPulsmesser("Pulsmesser");
+//			zubehoerx1.setFlaschenhalter("Flaschenhalter");
 		}
 		
 		return artikel;

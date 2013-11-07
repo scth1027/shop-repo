@@ -33,7 +33,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         private Double stueckpreis;
         private Integer bestand;
         private Unterkategorie unterkategorie;
-        private URI bestellungenUri;
+//        private URI bestellungenUri;
                 
         public Long getArtikelnummer() {
                 return artikelnummer;
@@ -59,12 +59,12 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         public void setBestand(Integer bestand) {
                 this.bestand = bestand;
         }
-        public URI getBestellungenUri() {
-                return bestellungenUri;
-        }
-        public void setBestellungenUri(URI bestellungenUri) {
-                this.bestellungenUri = bestellungenUri;
-        }
+//        public URI getBestellungenUri() {
+//                return bestellungenUri;
+//        }
+//        public void setBestellungenUri(URI bestellungenUri) {
+//                this.bestellungenUri = bestellungenUri;
+//        }
         
         public Unterkategorie getUnterkategorie() {
                 return unterkategorie;
@@ -82,10 +82,10 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 					+ ((artikelnummer == null) ? 0 : artikelnummer.hashCode());
 			result = prime * result
 					+ ((bestand == null) ? 0 : bestand.hashCode());
-			result = prime
-					* result
-					+ ((bestellungenUri == null) ? 0 : bestellungenUri
-							.hashCode());
+//			result = prime
+//					* result
+//					+ ((bestellungenUri == null) ? 0 : bestellungenUri
+//							.hashCode());
 			result = prime * result + ((name == null) ? 0 : name.hashCode());
 			result = prime * result
 					+ ((stueckpreis == null) ? 0 : stueckpreis.hashCode());
@@ -110,11 +110,11 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 					return false;
 			} else if (!bestand.equals(other.bestand))
 				return false;
-			if (bestellungenUri == null) {
-				if (other.bestellungenUri != null)
-					return false;
-			} else if (!bestellungenUri.equals(other.bestellungenUri))
-				return false;
+//			if (bestellungenUri == null) {
+//				if (other.bestellungenUri != null)
+//					return false;
+//			} else if (!bestellungenUri.equals(other.bestellungenUri))
+//				return false;
 			if (name == null) {
 				if (other.name != null)
 					return false;
@@ -130,7 +130,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         
         @Override
         public String toString() {
-                return "AbstractArtikel [Artikelnummer=" + artikelnummer + ", name=" + name + ", Unterkategorie:" + unterkategorie.toString() + ", bestellungenUri=" + bestellungenUri + "]";
+                return "AbstractArtikel [Artikelnummer=" + artikelnummer + ", name=" + name + ", Unterkategorie:" + unterkategorie.toString() + "]";
         }
 
 }
