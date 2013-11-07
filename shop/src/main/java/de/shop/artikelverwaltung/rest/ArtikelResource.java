@@ -58,14 +58,6 @@ public class ArtikelResource {
 	private UriHelper uriHelper;
 	
 	@GET
-	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
-	@Path("version")
-	public String getVersion() {
-		return "1.0";
-	}
-	
-	
-	@GET
 	@Path("{" + ARTIKEL_ID_PATH_PARAM + ":[1-9][0-9]*}")
 	public Response findArtikelByID(@PathParam(ARTIKEL_ID_PATH_PARAM) Long artikelnummer) {
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
