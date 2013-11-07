@@ -1,6 +1,6 @@
 package de.shop.bestellverwaltung.domain;
 
-import de.shop.artikelverwaltung.Artikel;
+import de.shop.artikelverwaltung.domain.Artikel;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

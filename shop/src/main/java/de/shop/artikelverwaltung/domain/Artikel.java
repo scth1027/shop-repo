@@ -1,4 +1,6 @@
-package de.shop.artikelverwaltung;
+package de.shop.artikelverwaltung.domain;
+
+import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -9,7 +11,7 @@ public class Artikel {
 	//Attribute
 	private Long id;
 	private String bezeichnung;
-	private Double preis;
+	private BigDecimal preis;
 	private String hersteller;
 	
 	//Getter & Setter
@@ -25,10 +27,10 @@ public class Artikel {
 	public void setBezeichung(String bezeichung) {
 		this.bezeichnung = bezeichung;
 	}
-	public Double getPreis() {
+	public BigDecimal getPreis() {
 		return preis;
 	}
-	public void setPreis(Double preis) {
+	public void setPreis(BigDecimal preis) {
 		this.preis = preis;
 	}
 	public String getHersteller() {
@@ -37,16 +39,6 @@ public class Artikel {
 	public void setHersteller(String hersteller) {
 		this.hersteller = hersteller;
 	}
-	
-	//Konstruktor
-		public Artikel(Long id, String bezeichnung, Double preis, String hersteller) 
-		{
-			super();
-			this.id = id;
-			this.bezeichnung = bezeichnung;
-			this.preis = preis;
-			this.hersteller= hersteller;
-		}
 		
 		//Methoden
 		@Override
