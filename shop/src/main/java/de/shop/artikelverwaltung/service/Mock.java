@@ -49,7 +49,7 @@ public final class Mock {
 		
 		if (artikel.getClass().equals(Ersatzteile.class)) {
 			final Ersatzteile ersatzteile = (Ersatzteile) artikel;
-			ersatzteile.setArtikeldetails("Artikeldetails");
+			ersatzteile.setArtikeldetails_e("Artikeldetails");
 		}
 		else if (artikel.getClass().equals(Fahrrad.class)) {
 			final Fahrrad fahrrad = (Fahrrad) artikel;

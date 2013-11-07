@@ -2,11 +2,8 @@ package de.shop.artikelverwaltung.domain;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement
-
 public class Ersatzteile extends AbstractArtikel {
-	
 
 	private static final long serialVersionUID = 928059348953288434L;
 
@@ -16,7 +13,7 @@ public class Ersatzteile extends AbstractArtikel {
 		return artikeldetails_e;
 	}
 
-	public void setArtikeldetails(String artikeldetails) {
+	public void setArtikeldetails_e(String artikeldetails_e) {
 		this.artikeldetails_e = artikeldetails_e;	
 	}
 
