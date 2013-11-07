@@ -6,9 +6,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @XmlRootElement
-public class Fahrrad extends Artikel {
+public class Fahrrad extends AbstractArtikel {
 	
 
+	private static final long serialVersionUID = 2951455983440524459L;
+	
 	private Set<Typ> typ;
 	private Set<Farbe> farbe;
 	

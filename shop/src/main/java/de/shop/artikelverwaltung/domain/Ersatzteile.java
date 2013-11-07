@@ -5,9 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 
-public class Ersatzteile {
+public class Ersatzteile extends AbstractArtikel {
 	
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 928059348953288434L;
 
 	private String artikeldetails;
 
