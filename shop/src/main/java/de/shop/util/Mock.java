@@ -41,8 +41,8 @@ public final class Mock {
 		if (kunde.getClass().equals(Privatkunde.class)) {
 			final Privatkunde privatkunde = (Privatkunde) kunde;
 			final Set<HobbyType> hobbies = new HashSet<>();
-			hobbies.add(HobbyType.LESEN);
-			hobbies.add(HobbyType.REISEN);
+			hobbies.add(HobbyType.FUSSBALL);
+			hobbies.add(HobbyType.REITEN);
 			privatkunde.setHobbies(hobbies);
 		}
 		
