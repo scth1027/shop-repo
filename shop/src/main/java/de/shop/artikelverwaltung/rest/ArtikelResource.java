@@ -8,7 +8,7 @@ import static de.shop.util.Constants.SELF_LINK;
 import static de.shop.util.Constants.UPDATE_LINK;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
-//import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
+import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 import static javax.ws.rs.core.MediaType.TEXT_XML;
 
 import java.net.URI;
@@ -16,8 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-//import javax.ws.rs.DELETE;
-//import javax.ws.rs.DefaultValue;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -157,11 +157,11 @@ public class ArtikelResource {
 		Mock.updateArtikel(artikel);
 	}
 	
-//	@DELETE
-//	@Path("{id:[1-9][0-9]*}")
-//	@Produces
-//	public void deleteArtikel(@PathParam(ARTIKEL_ID_PATH_PARAM) Long artikelnummer) {
-//		Mock.deleteArtikel(artikelnummer);
-//	}
+	@DELETE
+	@Path("{id:[1-9][0-9]*}")
+	@Produces
+	public void deleteArtikel(@PathParam(ARTIKEL_ID_PATH_PARAM) Long artikelnummer) {
+		Mock.deleteArtikel(artikelnummer);
+	}
 	
 }
