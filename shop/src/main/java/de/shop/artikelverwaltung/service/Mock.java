@@ -44,7 +44,7 @@ public final class Mock {
 		unterkategorie.setKlassenId((long)12345);        
 		unterkategorie.setName("Testunterklasse");
 		unterkategorie.setBeschreibung("Testbeschreibung");
-		unterkategorie.setArtikel(artikel);
+		//unterkategorie.setArtikel(artikel);
 		artikel.setUnterkategorie(unterkategorie);
 		
 		if (artikel.getClass().equals(Ersatzteile.class)) {
@@ -99,7 +99,7 @@ public final class Mock {
 		artikel.setArtikelnummer(Long.valueOf(name.length()));
 		final Unterkategorie unterkategoriex1 = artikel.getUnterkategorie();
 		unterkategoriex1.setKlassenId((Long.valueOf(name.length())) + 1);
-		unterkategoriex1.setArtikel(artikel);
+		//unterkategoriex1.setArtikel(artikel);
 		
 		System.out.println("Neuer Artikel: " + artikel);
 		return artikel;
