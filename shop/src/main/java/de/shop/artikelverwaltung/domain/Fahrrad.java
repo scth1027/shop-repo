@@ -11,15 +11,8 @@ public class Fahrrad extends AbstractArtikel {
 
 	private static final long serialVersionUID = 2951455983440524459L;
 	
-	private Set<Typ> typ;
 	private Set<Farbe> farbe;
-	
-	public Set<Typ> getTyp() {
-		return typ;
-	}
-	public void setTyp(Set<Typ> typ) {
-		this.typ = typ;
-	}
+
 	public Set<Farbe> getFarbe() {
 		return farbe;
 	}
@@ -29,6 +22,6 @@ public class Fahrrad extends AbstractArtikel {
 	
 	@Override
 	public String toString() {
-            return "Fahrrad [" + super.toString() + ", Typ:" + typ + ", Farbe:" + farbe + "]";
+            return "Fahrrad [" + super.toString() + ", Farbe:" + farbe + "]";
     }
 }
