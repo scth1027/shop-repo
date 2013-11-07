@@ -42,7 +42,7 @@ public final class Mock {
 		
 		final Unterkategorie unterkategorie = new Unterkategorie();
 		unterkategorie.setKlassenId((long)12345);        
-		unterkategorie.setName("Testunterklasse");
+		unterkategorie.setName("Testunterkategorie");
 		unterkategorie.setBeschreibung("Testbeschreibung");
 		//unterkategorie.setArtikel(artikel);
 		artikel.setUnterkategorie(unterkategorie);
