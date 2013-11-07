@@ -10,18 +10,18 @@ public class Unterkategorie implements Serializable {
 	
 	@XmlTransient
     
-	private AbstractArtikel artikel;
+	//private AbstractArtikel artikel;
     
     private Long klassenId;
     private String name;
     private String beschreibung;
 	
-    public AbstractArtikel getArtikel() {
-		return artikel;
-	}
-	public void setArtikel(AbstractArtikel artikel) {
-		this.artikel = artikel;
-	}
+    //public AbstractArtikel getArtikel() {
+		//return artikel;
+//	}
+//	public void setArtikel(AbstractArtikel artikel) {
+//		this.artikel = artikel;
+//	}
 	public Long getKlassenId() {
 		return klassenId;
 	}
