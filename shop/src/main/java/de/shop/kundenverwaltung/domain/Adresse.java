@@ -14,6 +14,7 @@ public class Adresse implements Serializable {
 	@XmlTransient
 	private AbstractKunde kunde;
 	
+	//Getter & Setter
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +40,8 @@ public class Adresse implements Serializable {
 	public void setKunde(AbstractKunde kunde) {
 		this.kunde = kunde;
 	}
+	
+	//Methoden
 	@Override
 	public int hashCode() {
 		final int prime = 31;

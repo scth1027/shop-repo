@@ -37,6 +37,7 @@ public abstract class AbstractKunde implements Serializable {
 	
 	private URI bestellungenUri;
 
+	//Getter & Setter
 	public Long getId() {
 		return id;
 	}
@@ -74,6 +75,8 @@ public abstract class AbstractKunde implements Serializable {
 	public void setBestellungenUri(URI bestellungenUri) {
 		this.bestellungenUri = bestellungenUri;
 	}
+	
+	//Methoden
 	@Override
 	public int hashCode() {
 		final int prime = 31;
