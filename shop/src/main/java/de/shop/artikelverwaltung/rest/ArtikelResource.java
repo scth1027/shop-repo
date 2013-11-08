@@ -47,7 +47,7 @@ import de.shop.util.rest.NotFoundException;
 @Consumes
 public class ArtikelResource {
 	
-	public static final String ARTIKEL_ID_PATH_PARAM = "artikelId";
+	public static final String ARTIKEL_ID_PATH_PARAM = "artikelnummer";
 	public static final String ARTIKEL_NAME_QUERY_PARAM = "name";
 	
 	@Context
@@ -158,7 +158,7 @@ public class ArtikelResource {
 	}
 	
 	@DELETE
-	@Path("{id:[1-9][0-9]*}")
+	@Path("{artikelnummer:[1-9][0-9]*}")
 	@Produces
 	public void deleteArtikel(@PathParam(ARTIKEL_ID_PATH_PARAM) Long artikelnummer) {
 		Mock.deleteArtikel(artikelnummer);
