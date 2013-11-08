@@ -137,9 +137,10 @@ public final class Mock {
 	public static Bestellung createBestellung(Bestellung bestellung)
 	{
 		final AbstractKunde kunde = bestellung.getKunde();
-        kunde.setId(Long.valueOf(2));
+        bestellung.setId(Long.valueOf("2"));
         final BigDecimal gesamtpreis = bestellung.getGesamtpreis();
-        gesamtpreis.setScale(15);
+        bestellung.setGesamtpreis(gesamtpreis);
+       // gesamtpreis.setScale(15);
         
 
 		System.out.println("Neue Bestellung: " + bestellung);
