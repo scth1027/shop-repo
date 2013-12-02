@@ -63,7 +63,7 @@ public class KundeResource {
 	}
 	
 	@GET
-	@Path("{"+  KUNDEN_ID_PATH_PARAM  +":[1-9][0-9]*}")
+	@Path("{" +  KUNDEN_ID_PATH_PARAM  + ":[1-9][0-9]*}")
 	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	public Response findKundeById(@PathParam(KUNDEN_ID_PATH_PARAM) Long id) {
 		// TODO Anwendungskern statt Mock
@@ -106,7 +106,7 @@ public class KundeResource {
                                 .rel(REMOVE_LINK)
                                 .build();
 		
-		return new Link[] { self, add, update, remove };
+		return new Link[] {self, add, update, remove };
 	}
 
 	
