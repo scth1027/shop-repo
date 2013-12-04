@@ -102,7 +102,7 @@ public final class Mock {
 		
 
 		final Adresse adresse = new Adresse();
-		adresse.setId(id+1);
+		adresse.setId(id + 1);
 		adresse.setPlz("12345");
 		adresse.setOrt("Testort");
 		bestellung.setLieferadresse(adresse);
@@ -134,8 +134,7 @@ public final class Mock {
 		System.out.println("Kunde mit ID=" + kundeId + " geloescht");
 	}
 
-	public static Bestellung createBestellung(Bestellung bestellung)
-	{
+	public static Bestellung createBestellung(Bestellung bestellung) {
 		final AbstractKunde kunde = bestellung.getKunde();
         bestellung.setId(Long.valueOf("2"));
         final BigDecimal gesamtpreis = bestellung.getGesamtpreis();

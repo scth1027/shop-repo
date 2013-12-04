@@ -20,6 +20,7 @@ import de.shop.artikelverwaltung.domain.Unterkategorie;
 
 public final class Mock {
 	private static final int MAX_ARTIKELNUMMER = 10000;
+	private static final int MAX_ERSATZTEIL = 5000;
 	private static final int MAX_ARTIKEL = 8;
 
 	public static AbstractArtikel findArtikelByID(Long artikelnummer) {
@@ -28,9 +29,9 @@ public final class Mock {
 		}
 		
 		AbstractArtikel artikel = null;
-		if(artikelnummer < 1000)
+		if (artikelnummer < MAX_ARTIKELNUMMER)
 			artikel = new Fahrrad();
-		else if(artikelnummer > 1000 && artikelnummer < 5000)
+		else if (artikelnummer > MAX_ARTIKELNUMMER && artikelnummer < MAX_ERSATZTEIL)
 			artikel = new Ersatzteile();
 		else
 			artikel = new Zubehoer();
@@ -41,7 +42,7 @@ public final class Mock {
 		artikel.setBestand(0);
 		
 		final Unterkategorie unterkategorie = new Unterkategorie();
-		unterkategorie.setKlassenId((long)12345);        
+		unterkategorie.setKlassenId(Long.valueOf("12345"));        
 		unterkategorie.setName("Testunterkategorie");
 		unterkategorie.setBeschreibung("Testbeschreibung");
 		//unterkategorie.setArtikel(artikel);
@@ -114,5 +115,5 @@ public final class Mock {
 		System.out.println("Artikel mit ID=" + artikelnummer + " geloescht");
 	}
 
-	private Mock() {}
+	private Mock() { }
 }
