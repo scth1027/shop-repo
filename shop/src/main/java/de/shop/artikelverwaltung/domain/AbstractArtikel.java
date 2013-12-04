@@ -1,7 +1,6 @@
 package de.shop.artikelverwaltung.domain;
 
 import java.io.Serializable;
-import java.net.URI;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -99,16 +98,18 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			AbstractArtikel other = (AbstractArtikel) obj;
+			final AbstractArtikel other = (AbstractArtikel) obj;
 			if (artikelnummer == null) {
 				if (other.artikelnummer != null)
 					return false;
-			} else if (!artikelnummer.equals(other.artikelnummer))
+			} 
+			else if (!artikelnummer.equals(other.artikelnummer))
 				return false;
 			if (bestand == null) {
 				if (other.bestand != null)
 					return false;
-			} else if (!bestand.equals(other.bestand))
+			} 
+			else if (!bestand.equals(other.bestand))
 				return false;
 //			if (bestellungenUri == null) {
 //				if (other.bestellungenUri != null)
@@ -118,19 +119,22 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 			if (name == null) {
 				if (other.name != null)
 					return false;
-			} else if (!name.equals(other.name))
+			} 
+			else if (!name.equals(other.name))
 				return false;
 			if (stueckpreis == null) {
 				if (other.stueckpreis != null)
 					return false;
-			} else if (!stueckpreis.equals(other.stueckpreis))
+			} 
+			else if (!stueckpreis.equals(other.stueckpreis))
 				return false;
 			return true;
 		}
         
         @Override
         public String toString() {
-                return "AbstractArtikel [Artikelnummer=" + artikelnummer + ", name=" + name + ", Unterkategorie:" + unterkategorie.toString() + "]";
+                return "AbstractArtikel [Artikelnummer=" + artikelnummer + ", name=" + name 
+                		+ ", Unterkategorie:" + unterkategorie.toString() + "]";
         }
 
 }

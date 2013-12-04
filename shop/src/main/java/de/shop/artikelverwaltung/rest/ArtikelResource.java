@@ -8,7 +8,6 @@ import static de.shop.util.Constants.SELF_LINK;
 import static de.shop.util.Constants.UPDATE_LINK;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
-import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 import static javax.ws.rs.core.MediaType.TEXT_XML;
 
 import java.net.URI;
@@ -17,7 +16,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -42,7 +40,7 @@ import de.shop.util.rest.NotFoundException;
 
 
 @Path("/artikel")
-@Produces({ APPLICATION_JSON, APPLICATION_XML + ";qs=0.75", TEXT_XML + ";qs=0.75"})
+@Produces( { APPLICATION_JSON, APPLICATION_XML + ";qs=0.75", TEXT_XML + ";qs=0.75"})
 
 @Consumes
 public class ArtikelResource {
@@ -89,11 +87,12 @@ public class ArtikelResource {
                                 .rel(UPDATE_LINK)
                                 .build();
 
-		final Link remove = Link.fromUri(uriHelper.getUri(ArtikelResource.class, "deleteArtikel", artikel.getArtikelnummer(), uriInfo))
+		final Link remove = Link.fromUri(uriHelper.getUri(ArtikelResource.class, "deleteArtikel", 
+										artikel.getArtikelnummer(), uriInfo))
                                 .rel(REMOVE_LINK)
                                 .build();
 		
-		return new Link[] { self, add, update, remove };
+		return new Link[] { self, add, update, remove};
 	}
 
 	
@@ -119,7 +118,7 @@ public class ArtikelResource {
 		}
 		
 		
-		return Response.ok(new GenericEntity<List<? extends AbstractArtikel>>(artikel){})
+		return Response.ok(new GenericEntity<List<? extends AbstractArtikel>>(artikel){ })
                        .links(getTransitionalLinksArtikel(artikel, uriInfo))
                        .build();
 	}
@@ -137,7 +136,7 @@ public class ArtikelResource {
                               .rel(LAST_LINK)
                               .build();
 		
-		return new Link[] { first, last };
+		return new Link[] {first, last };
 	}
 
 	@POST

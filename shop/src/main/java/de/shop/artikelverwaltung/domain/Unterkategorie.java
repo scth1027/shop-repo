@@ -59,21 +59,24 @@ public class Unterkategorie implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Unterkategorie other = (Unterkategorie) obj;
+		final Unterkategorie other = (Unterkategorie) obj;
 		if (beschreibung == null) {
 			if (other.beschreibung != null)
 				return false;
-		} else if (!beschreibung.equals(other.beschreibung))
+		} 
+		else if (!beschreibung.equals(other.beschreibung))
 			return false;
 		if (klassenId == null) {
 			if (other.klassenId != null)
 				return false;
-		} else if (!klassenId.equals(other.klassenId))
+		} 
+		else if (!klassenId.equals(other.klassenId))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} 
+		else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
