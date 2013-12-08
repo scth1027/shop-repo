@@ -36,7 +36,7 @@ public abstract class AbstractKunde implements Serializable {
 	private Long id;
 	
 	@NotNull
-	@Size( min = 2, max = 32)
+	@Size(min = 2, max = 32)
 	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)")
 	private String nachname;
 	

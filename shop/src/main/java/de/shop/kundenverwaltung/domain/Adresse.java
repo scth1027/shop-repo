@@ -19,7 +19,7 @@ public class Adresse implements Serializable {
 	private String plz;
 	
 	@NotNull
-	@Size( min = 2, max = 32)
+	@Size(min = 2, max = 32)
 	private String ort;
 	
 	@XmlTransient
