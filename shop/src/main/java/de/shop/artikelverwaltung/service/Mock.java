@@ -10,7 +10,7 @@ import de.shop.artikelverwaltung.domain.Ersatzteile;
 import de.shop.artikelverwaltung.domain.Fahrrad;
 import de.shop.artikelverwaltung.domain.Farbe;
 import de.shop.artikelverwaltung.domain.Zubehoer;
-import de.shop.artikelverwaltung.domain.Unterkategorie;
+//import de.shop.artikelverwaltung.domain.Unterkategorie;
 
 
 /**
@@ -19,25 +19,25 @@ import de.shop.artikelverwaltung.domain.Unterkategorie;
 
 
 public final class Mock {
-	private static final int MAX_ARTIKELNUMMER = 10000;
+	private static final int MAX_ID = 10000;
 	private static final int MAX_ERSATZTEIL = 5000;
 	private static final int MAX_ARTIKEL = 8;
 
 	public static AbstractArtikel findArtikelByID(Long artikelnummer) {
-		if (artikelnummer > MAX_ARTIKELNUMMER) {
+		if (artikelnummer > MAX_ID) {
 			return null;
 		}
 		
 		AbstractArtikel artikel = null;
-		if (artikelnummer < MAX_ARTIKELNUMMER)
+		if (id < MAX_ID)
 			artikel = new Fahrrad();
-		else if (artikelnummer > MAX_ARTIKELNUMMER && artikelnummer < MAX_ERSATZTEIL)
+		else if (id > MAX_ID && id < MAX_ERSATZTEIL)
 			artikel = new Ersatzteile();
 		else
 			artikel = new Zubehoer();
 		
-		artikel.setArtikelnummer(artikelnummer);
-		artikel.setName("Artikel" + artikelnummer);
+		artikel.setId(id);
+		artikel.setName("Artikel" + id);
 		artikel.setStueckpreis(0.00);
 		artikel.setBestand(0);
 		
@@ -46,7 +46,7 @@ public final class Mock {
 		unterkategorie.setName("Testunterkategorie");
 		unterkategorie.setBeschreibung("Testbeschreibung");
 		//unterkategorie.setArtikel(artikel);
-		artikel.setUnterkategorie(unterkategorie);
+		//artikel.setUnterkategorie(unterkategorie);
 		
 		if (artikel.getClass().equals(Ersatzteile.class)) {
 			final Ersatzteile ersatzteile = (Ersatzteile) artikel;
@@ -98,9 +98,9 @@ public final class Mock {
 		// Neue IDs fuer Artikel und zugehoerigem Preis + Bestand
 		// Ein neuer Artikel gehört auch zu keinen Bestellungen
 		final String name = artikel.getName();
-		artikel.setArtikelnummer(Long.valueOf(name.length()));
-		final Unterkategorie unterkategoriex1 = artikel.getUnterkategorie();
-		unterkategoriex1.setKlassenId((Long.valueOf(name.length())) + 1);
+		artikel.setId(Long.valueOf(name.length()));
+		//final Unterkategorie unterkategoriex1 = artikel.getUnterkategorie();
+		//unterkategoriex1.setKlassenId((Long.valueOf(name.length())) + 1);
 		//unterkategoriex1.setArtikel(artikel);
 		
 		System.out.println("Neuer Artikel: " + artikel);

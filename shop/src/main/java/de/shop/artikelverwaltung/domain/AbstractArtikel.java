@@ -1,6 +1,5 @@
 package de.shop.artikelverwaltung.domain;
 
-import static shop.util.Constants.KEINE_ID;
 import static javax.persistence.TemporalType.TIMESTAMP;
 
 import java.io.Serializable;
@@ -93,7 +92,7 @@ import org.jboss.logging.Logger;
         private String name = "";
         
         @Column(precision = 8, scale = 2)
-        private double stueckpreis;
+        private BigDecimal stueckpreis;
         
         @Min(0)
         @Max(99999)
@@ -145,10 +144,10 @@ import org.jboss.logging.Logger;
         public void setName(String name) {
                 this.name = name;
         }
-        public Double getStueckpreis() {
+        public BigDecimal getStueckpreis() {
                 return stueckpreis;
         }
-        public void setStueckpreis(Double stueckpreis) {
+        public void setStueckpreis(BigDecimal stueckpreis) {
                 this.stueckpreis = stueckpreis;
         }
         public Integer getBestand() {

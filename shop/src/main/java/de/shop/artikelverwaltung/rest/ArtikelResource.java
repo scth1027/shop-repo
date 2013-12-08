@@ -1,11 +1,6 @@
 package de.shop.artikelverwaltung.rest;
 
-import static de.shop.util.Constants.ADD_LINK;
-import static de.shop.util.Constants.FIRST_LINK;
-import static de.shop.util.Constants.LAST_LINK;
-import static de.shop.util.Constants.REMOVE_LINK;
-import static de.shop.util.Constants.SELF_LINK;
-import static de.shop.util.Constants.UPDATE_LINK;
+
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static javax.ws.rs.core.MediaType.TEXT_XML;
@@ -88,7 +83,7 @@ public class ArtikelResource {
                                 .build();
 
 		final Link remove = Link.fromUri(uriHelper.getUri(ArtikelResource.class, "deleteArtikel", 
-										artikel.getArtikelnummer(), uriInfo))
+										artikel.getId(), uriInfo))
                                 .rel(REMOVE_LINK)
                                 .build();
 		
@@ -97,7 +92,7 @@ public class ArtikelResource {
 
 	
 	public URI getUriArtikel(AbstractArtikel artikel, UriInfo uriInfo) {
-		return uriHelper.getUri(ArtikelResource.class, "findArtikelByID", artikel.getArtikelnummer(), uriInfo);
+		return uriHelper.getUri(ArtikelResource.class, "findArtikelByID", artikel.getId(), uriInfo);
 	}
 	
 	
