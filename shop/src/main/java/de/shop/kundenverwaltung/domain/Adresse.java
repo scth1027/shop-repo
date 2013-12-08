@@ -2,13 +2,24 @@ package de.shop.kundenverwaltung.domain;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
 
 public class Adresse implements Serializable {
 	private static final long serialVersionUID = -3029272617931844501L;
+	
+	
 	private Long id;
+	
+	@NotNull
+	@Pattern(regexp = "\\d{5}")
 	private String plz;
+	
+	@NotNull
+	@Size( min = 2, max = 32)
 	private String ort;
 	
 	@XmlTransient

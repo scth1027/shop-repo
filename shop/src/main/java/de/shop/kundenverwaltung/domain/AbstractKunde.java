@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlTransient;
@@ -11,6 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.hibernate.validator.constraints.Email;
 
 import de.shop.bestellverwaltung.domain.Bestellung;
 
@@ -27,11 +32,24 @@ public abstract class AbstractKunde implements Serializable {
 	public static final String PRIVATKUNDE = "P";
 	public static final String FIRMENKUNDE = "F";
 	
+	@NotNull
 	private Long id;
+	
+	@NotNull
+	@Size( min = 2, max = 32)
+	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)")
 	private String nachname;
+	
+	@NotNull
+	@Email
 	private String email;
+	
+	@NotNull
+	@Valid
 	private Adresse adresse;
 	
+	@NotNull
+	@Valid
 	@XmlTransient
 	private List<Bestellung> bestellungen;
 	
