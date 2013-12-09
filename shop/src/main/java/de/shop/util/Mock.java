@@ -169,7 +169,7 @@ public final class Mock {
  }
 
  public static AbstractArtikel findArtikelById(Long id) {
-     if (id == null) {
+     if (id > MAX_ARTIKEL) {
              return null;
      }
      
