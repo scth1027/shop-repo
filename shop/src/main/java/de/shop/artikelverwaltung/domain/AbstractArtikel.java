@@ -1,56 +1,16 @@
 package de.shop.artikelverwaltung.domain;
 
-import static javax.persistence.TemporalType.TIMESTAMP;
-
 import java.io.Serializable;
-import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
-import java.util.Date;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.NamedQueries;
-import javax.persistence.Inheritance;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
-import javax.persistence.NamedEntityGraphs;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
-import javax.persistence.PostLoad;
-import javax.persistence.PostPersist;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.groups.Default;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.ScriptAssert;
-import org.jboss.logging.Logger;
 
 
 
@@ -67,7 +27,7 @@ import org.jboss.logging.Logger;
 		public abstract class AbstractArtikel implements Serializable {
 	
 	    private static final long serialVersionUID = -97562639100824340L;
-	    private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass());
+
 
 		public static final String ERSATZTEILE = "E";
         public static final String FAHRRAD = "F";
@@ -81,17 +41,13 @@ import org.jboss.logging.Logger;
         public static final String PARAM_NAME = "name";
         public static final String PARAM_PREIS = "preis";
         
-        @Id
-        @GeneratedValue
-        @Column(nullable = false, updatable = false)
+
         private Long id = null;
-        
-        @Column(length = NAME_LENGTH_MAX, nullable = false)
+      
         @NotNull(message = "{artikel.name.notNull}")
         @Size(max = NAME_LENGTH_MAX, message = "{artikel.name.length}")
         private String name = "";
-        
-        @Column(precision = 8, scale = 2)
+
         private BigDecimal stueckpreis;
         
         @Min(0)
@@ -99,38 +55,6 @@ import org.jboss.logging.Logger;
         private Integer bestand;
         
         private boolean ausgesondert;
-        
-        @Basic(optional = false)
-        @Temporal(TIMESTAMP)
-        @XmlTransient
-        private Date create;
-
-        @Basic(optional = false)
-        @Temporal(TIMESTAMP)
-        @XmlTransient
-        private Date update;
-        
-        @PrePersist
-        protected void prePersist() {
-                create = new Date();
-                update = new Date();
-        }
-        
-        @PostPersist
-        protected void postPersist() {
-                LOGGER.debugf("Neuer Artikel mit ID=%d", id);
-        }
-        
-        @PreUpdate
-        protected void preUpdate() {
-                update = new Date();
-        }
-        
-        public void setValues(AbstractArtikel a) {
-                name = a.name;
-                stueckpreis = a.stueckpreis;
-                bestand = a.bestand;
-        }
                 
         public Long getId() {
                 return id;
@@ -162,21 +86,6 @@ import org.jboss.logging.Logger;
 
         public void setAusgesondert(boolean ausgesondert) {
             	this.ausgesondert = ausgesondert;
-        }
-        public Date getcreate() {
-        		return create == null ? null : (Date) create.clone();
-        }
-
-        public void setcreate(Date create) {
-            	this.create = create == null ? null : (Date) create.clone();
-        }
-
-        public Date getupdate() {
-            	return update == null ? null : (Date) update.clone();
-        }
-
-        public void setupdate(Date update) {
-            	this.update = update == null ? null : (Date) update.clone();
         }
         
         @Override
@@ -223,9 +132,7 @@ import org.jboss.logging.Logger;
         @Override
         public String toString() {
                 return "Artikel [ID=" + id + ", name=" + name
-                       + ", stueckpreis=" + stueckpreis + ", ausgesondert=" + ausgesondert
-                       + ", create=" + create
-                           + ", update=" + update + "]";
+                       + ", stueckpreis=" + stueckpreis + ", ausgesondert=" + ausgesondert + "]";
         }
 
 }
