@@ -7,19 +7,19 @@ public class Ersatzteile extends AbstractArtikel {
 
 	private static final long serialVersionUID = 928059348953288434L;
 
-	private String artikeldetails_e;
+	private String artikeldetailse;
 
-	public String getArtikeldetails_e() {
-		return artikeldetails_e;
+	public String getArtikeldetailse() {
+		return artikeldetailse;
 	}
 
 	public void setArtikeldetails_e(String artikeldetails_e) {
-		this.artikeldetails_e = artikeldetails_e;	
+		this.artikeldetailse = artikeldetails_e;	
 	}
 
 	@Override
 	public String toString() {
-		return "Ersatzteile [" + super.toString() + ", Artikeldetails:" + artikeldetails_e + "]";
+		return "Ersatzteile [" + super.toString() + ", Artikeldetails:" + artikeldetailse + "]";
 	}
 	
 }
