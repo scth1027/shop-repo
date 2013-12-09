@@ -48,7 +48,7 @@ public abstract class AbstractArtikel implements Serializable {
       
         @NotNull(message = "{artikel.name.NotNull}")
         @Size(min = 2, max = 32, message = "{artikel.name.size}")
-        @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)", message = "{artikel.name.pattern}")
+        @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+", message = "{artikel.name.pattern}")
         private String name = "";
 
         @NotNull(message = "{artikel.stueckpreis.NotNull}")
