@@ -53,7 +53,7 @@ public class KundenService implements Serializable {
 	}
 	
 	public void deleteKunde(Long kundeId) {
-		AbstractKunde kunde = findKundeById(kundeId); 
+		final AbstractKunde kunde = findKundeById(kundeId); 
 		if (kunde == null) {
 			return;
 		}
