@@ -1,10 +1,15 @@
 package de.shop.util;
 
+import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.jboss.logging.Logger;
 
 import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
@@ -12,14 +17,23 @@ import de.shop.kundenverwaltung.domain.Adresse;
 import de.shop.kundenverwaltung.domain.Firmenkunde;
 import de.shop.kundenverwaltung.domain.HobbyType;
 import de.shop.kundenverwaltung.domain.Privatkunde;
+import de.shop.artikelverwaltung.domain.AbstractArtikel;
+import de.shop.artikelverwaltung.domain.Ersatzteile;
+import de.shop.artikelverwaltung.domain.Fahrrad;
+import de.shop.artikelverwaltung.domain.Zubehoer;
 
 /**
  * Emulation des Anwendungskerns
  */
 public final class Mock {
+	 private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass());
 	private static final int MAX_ID = 99;
 	private static final int MAX_KUNDEN = 8;
 	private static final int MAX_BESTELLUNGEN = 4;
+	private static final int MAX_ARTIKEL = 500;
+	private static final int fahval = 200;
+    private static final int ersval = 300;
+    private static final int zubval = 400;
 
 	public static AbstractKunde findKundeById(Long id) {
 		if (id > MAX_ID) {
@@ -154,6 +168,52 @@ public final class Mock {
          System.out.println("Bestellung mit ID=" + bestellungId + " geloescht");
  }
 
+ public static AbstractArtikel findArtikelById(Long id) {
+     if (id == null) {
+             return null;
+     }
+     
+     final AbstractArtikel artikel;
+     if (fahval < id && id < ersval)
+             artikel = new Fahrrad();
+     else if (ersval < id && id < zubval)
+             artikel = new Ersatzteile();
+     else
+             artikel = new Zubehoer();
+     
+     artikel.setId(id);
+     artikel.setName("Name: " + id);
+     
+     return artikel;        
+}
+
+public static List<AbstractArtikel> findAllArtikel() {
+     final int anzahl = MAX_ARTIKEL;
+     final List<AbstractArtikel> artikels = new ArrayList<>(anzahl);
+     for (int i = 1; i <= anzahl; i++) {
+             final AbstractArtikel artikel = findArtikelById(Long.valueOf(i));
+             artikels.add(artikel);                        
+     }
+     return artikels;
+}
+
+public static <T extends AbstractArtikel> T createArtikel(T artikel) {
+     // Neue IDs fuer Artikel
+     final String name = artikel.getName();
+     artikel.setId(Long.valueOf(name.length()));
+     artikel.setStueckpreis(null);
+     
+     LOGGER.infof("Neuer Artikel: %s", artikel);
+     return artikel;
+}
+
+public static void updateArtikel(AbstractArtikel artikel) {
+     LOGGER.infof("Aktualisierter Artikel: %s", artikel);
+}
+
+public static void deleteArtikel(AbstractArtikel artikel) {
+     LOGGER.infof("Geloeschter Artikel: %s", artikel);
+}
 	
 	private Mock() { /**/ }
 }
