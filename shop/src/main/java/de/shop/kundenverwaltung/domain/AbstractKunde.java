@@ -35,16 +35,16 @@ public abstract class AbstractKunde implements Serializable {
 	@NotNull
 	private Long id;
 	
-	@NotNull
-	@Size(min = 2, max = 32)
-	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)")
+	@NotNull(message = "{kunde.nachname.NotNull}")
+	@Size(min = 2, max = 32, message = "{kunde.nachname.size}")
+	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)", message = "{kunde.nachname.pattern}")
 	private String nachname;
 	
-	@NotNull
-	@Email
+	@NotNull(message = "{kunde.email.NotNull}")
+	@Email(message = "{kunde.email.pattern}")
 	private String email;
 	
-	@NotNull
+	@NotNull(message = "{kunde.adresse.NotNull}")
 	@Valid
 	private Adresse adresse;
 	
