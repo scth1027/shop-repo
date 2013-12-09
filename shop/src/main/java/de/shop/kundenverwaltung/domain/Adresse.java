@@ -14,12 +14,12 @@ public class Adresse implements Serializable {
 	
 	private Long id;
 	
-	@NotNull
-	@Pattern(regexp = "\\d{5}")
+	@NotNull(message = "{adresse.plz.NotNull}")
+	@Pattern(regexp = "\\d{5}", message = "{adresse.plz.pattern}")
 	private String plz;
 	
-	@NotNull
-	@Size(min = 2, max = 32)
+	@NotNull(message = "{adresse.ort.NotNull}")
+	@Size(min = 2, max = 32, message = "{adresse.ort.size}")
 	private String ort;
 	
 	@XmlTransient
