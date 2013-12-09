@@ -15,6 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -205,7 +206,7 @@ public class KundeResource {
 	@POST
 	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
-	public Response createKunde(AbstractKunde kunde) {
+	public Response createKunde(@Valid AbstractKunde kunde) {
 		kunde = ks.createKunde(kunde);
 		return Response.created(getUriKunde(kunde, uriInfo))
 			           .build();
@@ -214,7 +215,7 @@ public class KundeResource {
 	@PUT
 	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
-	public void updateKunde(AbstractKunde kunde) {
+	public void updateKunde(@Valid AbstractKunde kunde) {
 		ks.updateKunde(kunde);
 	}
 	
