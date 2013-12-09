@@ -15,6 +15,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 
 
+
 @XmlRootElement
 @XmlSeeAlso({ Ersatzteile.class, Fahrrad.class, Zubehoer.class })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
