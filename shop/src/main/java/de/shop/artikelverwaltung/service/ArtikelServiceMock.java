@@ -7,16 +7,15 @@ import de.shop.artikelverwaltung.domain.Fahrrad;
 import de.shop.artikelverwaltung.domain.Zubehoer;
 import de.shop.util.cdi.MockService;
 import de.shop.util.interceptor.Log;
-import java.io.Serializable;
 
 @MockService
 @Dependent
 @Log
 public class ArtikelServiceMock extends ArtikelService {
 	private static final long serialVersionUID = 6728696474015590029L;
-	private final int FAHVAL = 200;
-	private final int ERSVAL = 300;
-	private final int ZUBVAL = 400;
+	private final int fahval = 200;
+	private final int ersval = 300;
+	private final int zubval = 400;
 	
 	@Override
 	public AbstractArtikel findArtikelById(Long id) {
@@ -24,9 +23,9 @@ public class ArtikelServiceMock extends ArtikelService {
 			return null;
 		}
 		final AbstractArtikel artikel;
-		if (FAHVAL < id && id < ERSVAL)
+		if (fahval < id && id < ersval)
 			artikel = new Fahrrad();
-		else if (ERSVAL < id && id < ZUBVAL)
+		else if (ersval < id && id < zubval)
 			artikel = new Ersatzteile();
 		else
 			artikel = new Zubehoer();
