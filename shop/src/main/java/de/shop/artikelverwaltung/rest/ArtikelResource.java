@@ -70,7 +70,7 @@ public class ArtikelResource {
         public Response findArtikelById(@PathParam("id") Long id) {
                 final AbstractArtikel artikel = as.findArtikelById(id);
                 if (artikel == null) {
-        			throw new NotFoundException("Artikel mit der " +id+ "konnte nicht gefunden werden");
+        			throw new NotFoundException("Artikel mit der " + id + "konnte nicht gefunden werden");
         		}
                 return Response.ok(artikel)
                        .links(getTransitionalLinks(artikel, uriInfo))

@@ -80,7 +80,7 @@ public class ArtikelService implements Serializable {
         }
 
         public void deleteArtikel(Long artikelId) {
-                AbstractArtikel artikel = findArtikelById(artikelId);  // Kein Aufruf als Business-Methode
+                final AbstractArtikel artikel = findArtikelById(artikelId);  // Kein Aufruf als Business-Methode
                 if (artikel == null) {
                         return;
                 }
