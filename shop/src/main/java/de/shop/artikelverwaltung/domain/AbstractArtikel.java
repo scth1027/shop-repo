@@ -24,10 +24,9 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         @Type(value = Zubehoer.class, name = AbstractArtikel.ZUBEHOER) 
         })
       
-		public abstract class AbstractArtikel implements Serializable {
+public abstract class AbstractArtikel implements Serializable {
 	
 	    private static final long serialVersionUID = -97562639100824340L;
-
 
 		public static final String ERSATZTEILE = "E";
         public static final String FAHRRAD = "F";
@@ -59,7 +58,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
         public Long getId() {
                 return id;
         }
-        public void setId(Long Id) {
+        public void setId(Long id) {
                 this.id = id;
         }
         public String getName() {
