@@ -51,13 +51,14 @@ public abstract class AbstractArtikel implements Serializable {
         @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)", message = "{artikel.name.pattern}")
         private String name = "";
 
-        
+        @NotNull(message = "{artikel.stueckpreis.NotNull}")
         private BigDecimal stueckpreis;
         
         @Min(0)
         @Max(99999)
         private Integer bestand;
         
+        @NotNull(message = "{artikel.ausgesondert.NotNull}")
         private boolean ausgesondert;
                 
         public Long getId() {
