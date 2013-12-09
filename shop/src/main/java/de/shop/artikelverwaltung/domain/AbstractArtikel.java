@@ -2,12 +2,15 @@ package de.shop.artikelverwaltung.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
+
 import org.codehaus.jackson.annotate.JsonSubTypes;
 import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
@@ -33,7 +36,6 @@ public abstract class AbstractArtikel implements Serializable {
         public static final String FAHRRAD = "F";
         public static final String ZUBEHOER = "Z";
         
-        private static final int NAME_LENGTH_MAX = 32;
         private static final String PREFIX = "AbstractArtikel.";
         public static final String FIND_AVAILABLE = PREFIX + "findVerfuegbareArtikel";
         public static final String FIND_ARTIKEL_BY_NAME = PREFIX + "findArtikelByName";
@@ -41,13 +43,15 @@ public abstract class AbstractArtikel implements Serializable {
         public static final String PARAM_NAME = "name";
         public static final String PARAM_PREIS = "preis";
         
-
-        private Long id = null;
+        @NotNull(message = "{artikel.id.NotNull}")
+        private Long id;
       
-        @NotNull(message = "{artikel.name.notNull}")
-        @Size(max = NAME_LENGTH_MAX, message = "{artikel.name.length}")
+        @NotNull(message = "{artikel.name.NotNull}")
+        @Size(min = 2, max = 32, message = "{artikel.name.size}")
+        @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)", message = "{artikel.name.pattern}")
         private String name = "";
 
+        
         private BigDecimal stueckpreis;
         
         @Min(0)

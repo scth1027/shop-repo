@@ -28,9 +28,7 @@ public class ArtikelService implements Serializable {
    
 	private static final long serialVersionUID = 6910977506144760877L;
 		private static final Logger LOGGER = Logger.getLogger(MethodHandles.lookup().lookupClass());
-		 private final int fahval = 200;
-	     private final int ersval = 300;
-	     private final int zubval = 400;
+
 
         
         @PostConstruct
@@ -45,7 +43,7 @@ public class ArtikelService implements Serializable {
         
 
         
-        @NotNull(message = "{kunde.notFound.id}")
+        @NotNull(message = "{artikel.notFound.id}")
         public AbstractArtikel findArtikelById(Long id) {
                 if (id == null) {
                         return null;

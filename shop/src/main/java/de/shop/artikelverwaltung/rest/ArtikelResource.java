@@ -34,6 +34,7 @@ import de.shop.artikelverwaltung.domain.AbstractArtikel;
 import de.shop.artikelverwaltung.service.ArtikelService;
 import de.shop.util.interceptor.Log;
 import de.shop.util.rest.UriHelper;
+import de.shop.util.rest.NotFoundException;
 
 
 @Path("/artikel")
@@ -68,6 +69,9 @@ public class ArtikelResource {
         @Path("{id:[1-9][0-9]*}")
         public Response findArtikelById(@PathParam("id") Long id) {
                 final AbstractArtikel artikel = as.findArtikelById(id);
+                if (artikel == null) {
+        			throw new NotFoundException("Artikel mit der " +id+ "konnte nicht gefunden werden");
+        		}
                 return Response.ok(artikel)
                        .links(getTransitionalLinks(artikel, uriInfo))
                        .build();
