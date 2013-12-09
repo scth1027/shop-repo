@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -19,12 +21,28 @@ import de.shop.kundenverwaltung.domain.Adresse;
 public class Bestellung {
 	
 	//Attribute
+	@NotNull
 	private Long id;
+	
+	@NotNull(message = "{bestellung.abstractkunde.NotNull}")
+	@Valid
 	private AbstractKunde kunde;
+	
+	@NotNull(message = "{bestellung.date.NotNull}")
+	@Valid
 	private Date bestelldatum;
+	
+	@NotNull(message = "{bestellung.gesamtpreis.NotNull}")
 	private BigDecimal gesamtpreis;
+	
+	@NotNull(message = "{bestellung.adresse.NotNull}")
+	@Valid
 	private Adresse lieferadresse;
+	
 	private boolean status;
+	
+	@NotNull
+	@Valid
 	@XmlTransient
 	private List<Posten> posten;
 	private URI kundeUri;
