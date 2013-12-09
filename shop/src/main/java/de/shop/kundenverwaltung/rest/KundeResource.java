@@ -33,6 +33,7 @@ import javax.ws.rs.GET;
 import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.bestellverwaltung.rest.BestellungResource;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
+import de.shop.kundenverwaltung.service.KundenService;
 import de.shop.util.Mock;
 import de.shop.util.rest.UriHelper;
 import de.shop.util.rest.NotFoundException;
@@ -55,6 +56,9 @@ public class KundeResource {
 	@Inject
 	private UriHelper uriHelper;
 	
+	@Inject
+	private KundenService ks;
+	
 	@GET
 	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	@Path("version")
@@ -66,8 +70,7 @@ public class KundeResource {
 	@Path("{" +  KUNDEN_ID_PATH_PARAM  + ":[1-9][0-9]*}")
 	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	public Response findKundeById(@PathParam(KUNDEN_ID_PATH_PARAM) Long id) {
-		// TODO Anwendungskern statt Mock
-		final AbstractKunde kunde = Mock.findKundeById(id);
+		final AbstractKunde kunde = ks.findKundeById(id);
 		if (kunde == null) {
 			throw new NotFoundException("Kein Kunde gefunden");
 		}
@@ -119,15 +122,13 @@ public class KundeResource {
 	public Response findKundenByNachname(@QueryParam(KUNDEN_NACHNAME_QUERY_PARAM) String nachname) {
 		List<? extends AbstractKunde> kunden = null;
 		if (nachname != null) {
-			// TODO Anwendungskern statt Mock
-			kunden = Mock.findKundenByNachname(nachname);
+			kunden = ks.findKundenByNachname(nachname);
 			if (kunden.isEmpty()) {
 				throw new NotFoundException("Kein Kunde mit Nachname " + nachname + " gefunden.");
 			}
 		}
 		else {
-			// TODO Anwendungskern statt Mock, Verwendung von Locale
-			kunden = Mock.findAllKunden();
+			kunden = ks.findAllKunden();
 			if (kunden.isEmpty()) {
 				throw new NotFoundException("Keine Kunden vorhanden.");
 			}
@@ -162,7 +163,8 @@ public class KundeResource {
 	@Path("{id:[1-9][0-9]*}/bestellungen")
 	public Response findBestellungenByKundeId(@PathParam("id") Long kundeId) {
 		// TODO Anwendungskern statt Mock
-		final AbstractKunde kunde = Mock.findKundeById(kundeId);
+		final AbstractKunde kunde = ks.findKundeById(kundeId);
+		// TODO Bestellservice statt Mock 
 		final List<Bestellung> bestellungen = Mock.findBestellungenByKunde(kunde);
 		if (bestellungen.isEmpty()) {
 			throw new NotFoundException("Zur ID " + kundeId + " wurden keine Bestellungen gefunden");
@@ -204,8 +206,7 @@ public class KundeResource {
 	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
 	public Response createKunde(AbstractKunde kunde) {
-		// TODO Anwendungskern statt Mock
-		kunde = Mock.createKunde(kunde);
+		kunde = ks.createKunde(kunde);
 		return Response.created(getUriKunde(kunde, uriInfo))
 			           .build();
 	}
@@ -214,15 +215,13 @@ public class KundeResource {
 	@Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
 	@Produces
 	public void updateKunde(AbstractKunde kunde) {
-		// TODO Anwendungskern statt Mock
-		Mock.updateKunde(kunde);
+		ks.updateKunde(kunde);
 	}
 	
 	@DELETE
 	@Path("{id:[1-9][0-9]*}")
 	@Produces
 	public void deleteKunde(@PathParam("id") Long kundeId) {
-		// TODO Anwendungskern statt Mock
-		Mock.deleteKunde(kundeId);
+		ks.deleteKunde(kundeId);
 	}
 }
