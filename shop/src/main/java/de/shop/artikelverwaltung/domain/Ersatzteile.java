@@ -13,8 +13,8 @@ public class Ersatzteile extends AbstractArtikel {
 		return artikeldetailse;
 	}
 
-	public void setArtikeldetails_e(String artikeldetails_e) {
-		this.artikeldetailse = artikeldetails_e;	
+	public void setArtikeldetailse(String artikeldetailse) {
+		this.artikeldetailse = artikeldetailse;	
 	}
 
 	@Override

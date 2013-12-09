@@ -29,9 +29,9 @@ public final class Mock {
 	private static final int MAX_KUNDEN = 8;
 	private static final int MAX_BESTELLUNGEN = 4;
 	private static final int MAX_ARTIKEL = 500;
-	private static final int fahval = 200;
-    private static final int ersval = 300;
-    private static final int zubval = 400;
+	private static final int FAHVAL = 200;
+    private static final int ERSVAL = 300;
+    private static final int ZUBVAL = 400;
 
 	public static AbstractKunde findKundeById(Long id) {
 		if (id > MAX_ID) {
@@ -172,9 +172,9 @@ public final class Mock {
      }
      
      final AbstractArtikel artikel;
-     if (fahval < id && id < ersval)
+     if (FAHVAL < id && id < ERSVAL)
              artikel = new Fahrrad();
-     else if (ersval < id && id < zubval)
+     else if (ERSVAL < id && id < ZUBVAL)
              artikel = new Ersatzteile();
      else
              artikel = new Zubehoer();

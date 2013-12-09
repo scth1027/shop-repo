@@ -7,18 +7,18 @@ public class Zubehoer extends AbstractArtikel {
 
 	private static final long serialVersionUID = -104960093004088594L;
 	
-	private String artikeldetails_z;
+	private String artikeldetailsz;
 
-	public String getArtikeldetails_z() {
-		return artikeldetails_z;
+	public String getArtikeldetailsz() {
+		return artikeldetailsz;
 	}
 
-	public void setArtikeldetails_z(String artikeldetails_z) {
-		this.artikeldetails_z = artikeldetails_z;
+	public void setArtikeldetailsz(String artikeldetailsz) {
+		this.artikeldetailsz = artikeldetailsz;
 	}
 
 	@Override
 	public String toString() {
-		return "Zubehör [" + super.toString() + ", Artikeldetails:" + artikeldetails_z + "]";
+		return "Zubehör [" + super.toString() + ", Artikeldetails:" + artikeldetailsz + "]";
 	}
 }
