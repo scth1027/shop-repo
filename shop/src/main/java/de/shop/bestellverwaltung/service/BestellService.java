@@ -2,6 +2,7 @@ package de.shop.bestellverwaltung.service;
 
 import java.io.Serializable;
 import java.lang.invoke.MethodHandles;
+import java.net.URI;
 import java.util.List;
 
 import de.shop.util.Mock;
@@ -48,17 +49,18 @@ public class BestellService implements Serializable {
          return Mock.findBestellungenByKunde(kunde);
      }
      
-     public <T extends Bestellung> Bestellung createBestellung(Bestellung bestellung) {
-         if (bestellung == null) {
-                 return bestellung;
-         }
-         // TODO Datenbanzugriffsschicht statt Mock
-         bestellung = Mock.createBestellung(bestellung);
-
-         return bestellung;
+     public Bestellung createBestellung(Bestellung bestellung) {
+ 
+    	 final Long id = bestellung.getId();
+    	 bestellung.setId(Long.valueOf(id));
+    	 
+    	 final URI KundeUri = bestellung.getKundeUri();
+    	 bestellung.setKundeUri(KundeUri);
+    	   	 
+    	 return bestellung;
  }
      
-     public <T extends Bestellung> T updateBestellung(T bestellung) {
+     public Bestellung updateBestellung(Bestellung bestellung) {
          if (bestellung == null) {
                  return null;
          }
@@ -67,7 +69,7 @@ public class BestellService implements Serializable {
          Mock.updateBestellung(bestellung);
          
          return bestellung;
- }
+     }
   
      public void deleteBestellung(Long bestellId) {
          final Bestellung bestellung = findBestellungById(bestellId);  // Kein Aufruf als Business-Methode

@@ -24,11 +24,12 @@ import javax.ws.rs.core.Link;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+//import de.shop.artikelverwaltung.rest.ArtikelResource;
 import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.bestellverwaltung.service.BestellService;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.rest.KundeResource;
-import de.shop.util.Mock;
+//import de.shop.util.Mock;
 import de.shop.util.rest.UriHelper;
 
 
@@ -91,13 +92,17 @@ public class BestellungResource {
 		return uriHelper.getUri(BestellungResource.class, "findBestellungById", bestellung.getId(), uriInfo);
 	}
 	
+	public URI getUriKunde(AbstractKunde kunde, UriInfo uriInfo) {
+		return uriHelper.getUri(KundeResource.class, "findKundeById", kunde.getId(), uriInfo);
+	}
+	
 	@POST
     @Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
     @Produces
     public Response createBestellung(@Valid Bestellung bestellung) {
             // TODO Anwendungskern statt Mock
             bestellung = bs.createBestellung(bestellung);
-            return Response.created(getUriBestellung(bestellung, uriInfo))
+            return Response.created(getUriKunde(bestellung.getKunde(), uriInfo))
                             .build();
 	}
 	
