@@ -43,7 +43,7 @@ public abstract class AbstractArtikel implements Serializable {
         public static final String PARAM_NAME = "name";
         public static final String PARAM_PREIS = "preis";
         
-        //@NotNull(message = "{artikel.id.NotNull}")
+        @NotNull(message = "{artikel.id.NotNull}")
         private Long id;
       
         @NotNull(message = "{artikel.name.NotNull}")
@@ -51,14 +51,14 @@ public abstract class AbstractArtikel implements Serializable {
         @Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+", message = "{artikel.name.pattern}")
         private String name = "";
 
-        //@NotNull(message = "{artikel.stueckpreis.NotNull}")
+        @NotNull(message = "{artikel.stueckpreis.NotNull}")
         private BigDecimal stueckpreis;
         
         @Min(0)
         @Max(99999)
         private Integer bestand;
         
-        //@NotNull(message = "{artikel.ausgesondert.NotNull}")
+        @NotNull(message = "{artikel.ausgesondert.NotNull}")
         private boolean ausgesondert;
                 
         public Long getId() {
