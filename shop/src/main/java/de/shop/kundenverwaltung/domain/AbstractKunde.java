@@ -32,12 +32,12 @@ public abstract class AbstractKunde implements Serializable {
 	public static final String PRIVATKUNDE = "P";
 	public static final String FIRMENKUNDE = "F";
 	
-	@NotNull
+	//@NotNull
 	private Long id;
 	
 	@NotNull(message = "{kunde.nachname.NotNull}")
 	@Size(min = 2, max = 32, message = "{kunde.nachname.size}")
-	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+(-[A-ZÄÖÜ][a-zäöüß]+)", message = "{kunde.nachname.pattern}")
+	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+", message = "{kunde.nachname.pattern}")
 	private String nachname;
 	
 	@NotNull(message = "{kunde.email.NotNull}")
@@ -48,7 +48,7 @@ public abstract class AbstractKunde implements Serializable {
 	@Valid
 	private Adresse adresse;
 	
-	@NotNull
+	//@NotNull
 	@Valid
 	@XmlTransient
 	private List<Bestellung> bestellungen;
