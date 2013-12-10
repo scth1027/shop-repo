@@ -21,5 +21,5 @@ public class Ersatzteile extends AbstractArtikel {
 	public String toString() {
 		return "Ersatzteile [" + super.toString() + ", Artikeldetails:" + artikeldetails_e + "]";
 	}
-	
+
 }

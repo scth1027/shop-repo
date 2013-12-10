@@ -1,6 +1,7 @@
 package de.shop.bestellverwaltung.domain;
 
 import java.util.Date;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
@@ -17,8 +18,11 @@ import de.shop.kundenverwaltung.domain.Adresse;
 
 
 
+
 @XmlRootElement
-public class Bestellung {
+public class Bestellung implements Serializable{
+	
+	private static final long serialVersionUID = -97562639100824340L;
 	
 	//Attribute
 	@NotNull
