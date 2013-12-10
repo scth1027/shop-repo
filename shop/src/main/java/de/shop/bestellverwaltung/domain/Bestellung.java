@@ -45,7 +45,7 @@ public class Bestellung implements Serializable {
 	
 	private boolean status;
 	
-	@NotNull
+	//@NotNull
 	@Valid
 	@XmlTransient
 	private List<Posten> posten;
