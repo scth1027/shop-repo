@@ -3,11 +3,13 @@ package de.shop.bestellverwaltung.rest;
 import static de.shop.util.Constants.SELF_LINK;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.APPLICATION_XML;
+import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
 import static javax.ws.rs.core.MediaType.TEXT_XML;
 
 import java.net.URI;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.DELETE;
@@ -23,6 +25,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import de.shop.bestellverwaltung.domain.Bestellung;
+import de.shop.bestellverwaltung.service.BestellService;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.rest.KundeResource;
 import de.shop.util.Mock;
@@ -44,11 +47,15 @@ public class BestellungResource {
 	@Inject
 	private KundeResource kundeResource;
 	
+	@Inject
+	private BestellService bs;
+	
 	@GET
 	@Path("{id:[1-9][0-9]*}")
+	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	public Response findBestellungById(@PathParam("id") Long id) {
 		// TODO Anwendungskern statt Mock, Verwendung von Locale
-		final Bestellung bestellung = Mock.findBestellungById(id);
+		final Bestellung bestellung = bs.findBestellungById(id);
 		if (bestellung == null) {
 
 			throw new NotFoundException("Keine Bestellung mit der ID " + id + " gefunden.");
@@ -87,9 +94,9 @@ public class BestellungResource {
 	@POST
     @Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
     @Produces
-    public Response createBestellung(Bestellung bestellung) {
+    public Response createBestellung(@Valid Bestellung bestellung) {
             // TODO Anwendungskern statt Mock
-            bestellung = Mock.createBestellung(bestellung);
+            bestellung = bs.createBestellung(bestellung);
             return Response.created(getUriBestellung(bestellung, uriInfo))
                             .build();
 	}
@@ -98,16 +105,16 @@ public class BestellungResource {
       @Path("{id:[1-9][0-9]*}")
       @Produces
       public void deleteBestellung(@PathParam("id") Long bestellungId) {
-              Mock.deleteBestellung(bestellungId);
+              bs.deleteBestellung(bestellungId);
       }
 
 
       @PUT
       @Consumes({APPLICATION_JSON, APPLICATION_XML, TEXT_XML })
       @Produces
-      public void updateBestellung(Bestellung bestellung) {
+      public void updateBestellung(@Valid Bestellung bestellung) {
               // TODO Anwendungskern statt Mock
-              Mock.updateBestellung(bestellung);
+              bs.updateBestellung(bestellung);
       }
 
 	
