@@ -20,7 +20,7 @@ import de.shop.kundenverwaltung.domain.Adresse;
 
 
 @XmlRootElement
-public class Bestellung implements Serializable{
+public class Bestellung implements Serializable {
 	
 	private static final long serialVersionUID = -97562639100824340L;
 	
