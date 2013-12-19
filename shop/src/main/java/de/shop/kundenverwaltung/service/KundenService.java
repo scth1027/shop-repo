@@ -3,12 +3,14 @@ package de.shop.kundenverwaltung.service;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.util.Mock;
 
+@Dependent
 public class KundenService implements Serializable {
 
 	private static final long serialVersionUID = 5326204988915561298L;
