@@ -2,12 +2,33 @@ package de.shop.bestellverwaltung.domain;
 
 import de.shop.artikelverwaltung.domain.Artikel;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
+
+@Entity
+@Table(indexes = {
+		@Index(columnList = "bestellung_fk"),
+		@Index(columnList = "artikel_fk")
+	})
 @XmlRootElement
 public class Posten {
 	
+	@Id
+	@GeneratedValue
+	@Basic(optional = false)
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "artikel_fk", nullable = false)
 	private Artikel artikel;
+	
 	private Long anzahl;
 	
 	public Artikel getArtikel() {

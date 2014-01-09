@@ -1,15 +1,32 @@
 package de.shop.bestellverwaltung.domain;
 
+import static de.shop.util.Constants.KEINE_ID;
+import static javax.persistence.CascadeType.PERSIST;
+import static javax.persistence.CascadeType.REMOVE;
+import static javax.persistence.FetchType.EAGER;
+
 import java.util.Date;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.domain.Adresse;
@@ -20,17 +37,31 @@ import de.shop.kundenverwaltung.domain.Adresse;
 
 
 @XmlRootElement
+@Entity
+
+@Table(indexes = {
+	@Index(columnList = "kunde_fk"),
+	@Index(columnList = "erzeugt")
+})
+
+
 public class Bestellung implements Serializable {
 	
 	private static final long serialVersionUID = -97562639100824340L;
 	
 	//Attribute
-	@NotNull
-	private Long id;
+	@Id
+	@GeneratedValue
+	@Basic(optional = false)
+	private Long id = KEINE_ID;
 	
-	@NotNull(message = "{bestellung.abstractkunde.NotNull}")
-	@Valid
+	@ManyToOne 
+	@JoinColumn (name = "kunde_fk", nullable = false, insertable = false, updatable = false)
+	@XmlTransient
 	private AbstractKunde kunde;
+	
+	@Transient
+	private URI kundeUri;
 	
 	@NotNull(message = "{bestellung.date.NotNull}")
 	@Valid
@@ -45,11 +76,11 @@ public class Bestellung implements Serializable {
 	
 	private boolean status;
 	
-	//@NotNull
 	@Valid
-	@XmlTransient
+	@OneToMany(fetch = EAGER, cascade = { PERSIST, REMOVE })
+	@JoinColumn(name = "bestellung_fk", nullable = false)
+	@NotEmpty 
 	private List<Posten> posten;
-	private URI kundeUri;
 	
 	//Getter & Setter
 	public Long getId() {
