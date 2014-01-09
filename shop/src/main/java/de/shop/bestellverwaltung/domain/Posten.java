@@ -10,6 +10,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -22,11 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Posten {
 	
-	@Id
-	@GeneratedValue
-	@Basic(optional = false)
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "artikel_fk", nullable = false)
+
 	private Artikel artikel;
 	
 	private Long anzahl;

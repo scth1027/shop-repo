@@ -40,8 +40,7 @@ import de.shop.kundenverwaltung.domain.Adresse;
 @Entity
 
 @Table(indexes = {
-	@Index(columnList = "kunde_fk"),
-	@Index(columnList = "erzeugt")
+	@Index(columnList = "kunde_fk")
 })
 
 
