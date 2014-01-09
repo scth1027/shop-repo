@@ -17,13 +17,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(indexes = {
-		@Index(columnList = "bestellung_fk"),
-		@Index(columnList = "artikel_fk")
+		@Index(columnList = "bestellung_fk")
 	})
 @XmlRootElement
 public class Posten {
 	
-
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	
 	private Artikel artikel;
 	
 	private Long anzahl;
