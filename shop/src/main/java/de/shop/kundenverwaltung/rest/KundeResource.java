@@ -17,6 +17,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -32,11 +33,16 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.GET;
 
+import org.hibernate.validator.constraints.Email;
+
+import com.google.common.base.Strings;
+
 import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.bestellverwaltung.rest.BestellungResource;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.service.KundenService;
 import de.shop.kundenverwaltung.service.KundenService.FetchType;
+import de.shop.kundenverwaltung.service.KundenService.OrderType;
 import de.shop.util.Mock;
 import de.shop.util.interceptor.Log;
 import de.shop.util.rest.UriHelper;
@@ -52,6 +58,8 @@ import de.shop.util.rest.NotFoundException;
 public class KundeResource {
 	public static final String KUNDEN_ID_PATH_PARAM = "kundeId";
 	public static final String KUNDEN_NACHNAME_QUERY_PARAM = "nachname";
+	public static final String KUNDEN_PLZ_QUERY_PARAM = "plz";
+	public static final String KUNDEN_EMAIL_QUERY_PARAM = "email";
 	
 	@Context
 	private UriInfo uriInfo;
@@ -124,29 +132,92 @@ public class KundeResource {
 	}
 
 	
+//	@GET
+//	public Response findKundenByNachname(@QueryParam(KUNDEN_NACHNAME_QUERY_PARAM) String nachname) {
+//		List<? extends AbstractKunde> kunden = null;
+//		if (nachname != null) {
+//			kunden = ks.findKundenByNachname(nachname, FetchType.NUR_KUNDE);
+//			if (kunden.isEmpty()) {
+//				throw new NotFoundException("Kein Kunde mit Nachname " + nachname + " gefunden.");
+//			}
+//		}
+//		else {
+//			kunden = ks.findAllKunden();
+//			if (kunden.isEmpty()) {
+//				throw new NotFoundException("Keine Kunden vorhanden.");
+//			}
+//		}
+//		
+//		for (AbstractKunde k : kunden) {
+//			setStructuralLinks(k, uriInfo);
+//		}
+//		
+//		return Response.ok(new GenericEntity<List<? extends AbstractKunde>>(kunden) { })
+//                       .links(getTransitionalLinksKunden(kunden, uriInfo))
+//                       .build();
+//	}
+//	
+//	private Link[] getTransitionalLinksKunden(List<? extends AbstractKunde> kunden, UriInfo uriInfo) {
+//		if (kunden == null || kunden.isEmpty()) {
+//			return null;
+//		}
+//		
+//		final Link first = Link.fromUri(getUriKunde(kunden.get(0), uriInfo))
+//	                           .rel(FIRST_LINK)
+//	                           .build();
+//		final int lastPos = kunden.size() - 1;
+//		final Link last = Link.fromUri(getUriKunde(kunden.get(lastPos), uriInfo))
+//                              .rel(LAST_LINK)
+//                              .build();
+//		
+//		return new Link[] {first, last };
+//	}
+	
 	@GET
-	public Response findKundenByNachname(@QueryParam(KUNDEN_NACHNAME_QUERY_PARAM) String nachname) {
+	public Response findKunden(@QueryParam(KUNDEN_NACHNAME_QUERY_PARAM)
+	                           String nachname,
+                               @QueryParam(KUNDEN_PLZ_QUERY_PARAM)
+                               @Pattern(regexp = "\\d{5}", message = "{adresse.plz}")
+                               String plz,
+                               @QueryParam(KUNDEN_EMAIL_QUERY_PARAM)
+							   @Email(message = "{kunde.email}")
+                               String email) {
 		List<? extends AbstractKunde> kunden = null;
-		if (nachname != null) {
-			kunden = ks.findKundenByNachname(nachname);
-			if (kunden.isEmpty()) {
-				throw new NotFoundException("Kein Kunde mit Nachname " + nachname + " gefunden.");
-			}
+		AbstractKunde kunde = null;
+		// TODO Mehrere Query-Parameter koennen angegeben sein
+		if (!Strings.isNullOrEmpty(nachname)) {
+			kunden = ks.findKundenByNachname(nachname, FetchType.NUR_KUNDE);
+		}
+//		else if (!Strings.isNullOrEmpty(plz)) {
+//			kunden = ks.findKundenByPLZ(plz);
+//		}
+		else if (!Strings.isNullOrEmpty(email)) {
+			kunde = ks.findKundeByEmail(email);
 		}
 		else {
-			kunden = ks.findAllKunden();
-			if (kunden.isEmpty()) {
-				throw new NotFoundException("Keine Kunden vorhanden.");
+			kunden = ks.findAllKunden(FetchType.NUR_KUNDE, OrderType.ID);
+		}
+		
+		Object entity = null;
+		Link[] links = null;
+		if (kunden != null) {
+			for (AbstractKunde k : kunden) {
+				setStructuralLinks(k, uriInfo);
 			}
+			// FIXME JDK 8 hat Lambda-Ausdruecke
+			//kunden.parallelStream()
+			//      .forEach(k -> setStructuralLinks(k, uriInfo));
+			entity = new GenericEntity<List<? extends AbstractKunde>>(kunden){};
+			links = getTransitionalLinksKunden(kunden, uriInfo);
+		}
+		else if (kunde != null) {
+			entity = kunde;
+			links = getTransitionalLinks(kunde, uriInfo);
 		}
 		
-		for (AbstractKunde k : kunden) {
-			setStructuralLinks(k, uriInfo);
-		}
-		
-		return Response.ok(new GenericEntity<List<? extends AbstractKunde>>(kunden) { })
-                       .links(getTransitionalLinksKunden(kunden, uriInfo))
-                       .build();
+		return Response.ok(entity)
+		               .links(links)
+		               .build();
 	}
 	
 	private Link[] getTransitionalLinksKunden(List<? extends AbstractKunde> kunden, UriInfo uriInfo) {
@@ -162,7 +233,7 @@ public class KundeResource {
                               .rel(LAST_LINK)
                               .build();
 		
-		return new Link[] {first, last };
+		return new Link[] { first, last };
 	}
 	
 	@GET

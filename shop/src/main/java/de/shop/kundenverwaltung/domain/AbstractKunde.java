@@ -1,16 +1,22 @@
 package de.shop.kundenverwaltung.domain;
 
+import static de.shop.util.Constants.KEINE_ID;
+
 import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -39,11 +45,71 @@ import de.shop.bestellverwaltung.domain.Bestellung;
 	@Type(value = Firmenkunde.class, name = AbstractKunde.FIRMENKUNDE) })
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "art", length = 1)
+@NamedQueries({
+	@NamedQuery(name  = AbstractKunde.FIND_KUNDEN,
+				query = "SELECT k"
+			        + " FROM   AbstractKunde k"),
+			        @NamedQuery(name  = AbstractKunde.FIND_KUNDEN_ORDER_BY_ID,
+			        query = "SELECT   k"
+					        + " FROM  AbstractKunde k"
+			                + " ORDER BY k.id"),
+		@NamedQuery(name  = AbstractKunde.FIND_IDS_BY_PREFIX,
+			        query = "SELECT   k.id"
+			                + " FROM  AbstractKunde k"
+			                + " WHERE CONCAT('', k.id) LIKE :" + AbstractKunde.PARAM_KUNDE_ID_PREFIX
+			                + " ORDER BY k.id"),
+		@NamedQuery(name  = AbstractKunde.FIND_KUNDEN_BY_NACHNAME,
+		            query = "SELECT k"
+					        + " FROM   AbstractKunde k"
+		            		+ " WHERE  UPPER(k.nachname) = UPPER(:" + AbstractKunde.PARAM_KUNDE_NACHNAME + ")"),
+		@NamedQuery(name  = AbstractKunde.FIND_NACHNAMEN_BY_PREFIX,
+	   	            query = "SELECT   DISTINCT k.nachname"
+					        + " FROM  AbstractKunde k "
+		            		+ " WHERE UPPER(k.nachname) LIKE UPPER(:"
+		            		+ AbstractKunde.PARAM_KUNDE_NACHNAME_PREFIX + ")"),
+	   	@NamedQuery(name  = AbstractKunde.FIND_KUNDE_BY_EMAIL,
+	   	            query = "SELECT DISTINCT k"
+	   			            + " FROM   AbstractKunde k"
+	   			            + " WHERE  k.email = :" + AbstractKunde.PARAM_KUNDE_EMAIL),
+	    @NamedQuery(name  = AbstractKunde.FIND_KUNDEN_BY_PLZ,
+		            query = "SELECT k"
+					        + " FROM  AbstractKunde k"
+				            + " WHERE k.adresse.plz = :" + AbstractKunde.PARAM_KUNDE_ADRESSE_PLZ),
+
+		@NamedQuery(name = AbstractKunde.FIND_PRIVATKUNDEN_FIRMENKUNDEN,
+				    query = "SELECT k"
+				            + " FROM  AbstractKunde k"
+				    		+ " WHERE TYPE(k) IN (Privatkunde, Firmenkunde)")
+	
+	
+})
+
+
+
 @Table(name="kunde", indexes = @Index(columnList = "nachname"))
 public abstract class AbstractKunde implements Serializable {
 	private static final long serialVersionUID = 7401524595142572933L;
 	
 	private static final String PREFIX = "AbstractKunde.";
+	public static final String FIND_KUNDEN = PREFIX + "findKunden";
+	public static final String FIND_KUNDEN_ORDER_BY_ID = PREFIX + "findKundenOrderById";
+	public static final String FIND_IDS_BY_PREFIX = PREFIX + "findIdsByPrefix";
+	public static final String FIND_KUNDEN_BY_NACHNAME = PREFIX + "findKundenByNachname";
+	public static final String FIND_NACHNAMEN_BY_PREFIX = PREFIX + "findNachnamenByPrefix";
+	public static final String FIND_KUNDE_BY_EMAIL = PREFIX + "findKundeByEmail";
+	public static final String FIND_KUNDEN_BY_PLZ = PREFIX + "findKundenByPlz";
+	public static final String FIND_KUNDEN_BY_DATE = PREFIX + "findKundenByDate";
+	public static final String FIND_PRIVATKUNDEN_FIRMENKUNDEN = PREFIX + "findPrivatkundenFirmenkunden";
+	
+	public static final String PARAM_KUNDE_ID = "kundeId";
+	public static final String PARAM_KUNDE_ID_PREFIX = "idPrefix";
+	public static final String PARAM_KUNDE_NACHNAME = "nachname";
+	public static final String PARAM_KUNDE_NACHNAME_PREFIX = "nachnamePrefix";
+	public static final String PARAM_KUNDE_ADRESSE_PLZ = "plz";
+	public static final String PARAM_KUNDE_EMAIL = "email";
+	
 	public static final String GRAPH_BESTELLUNGEN = PREFIX + "bestellungen";
 	
 	public static final String PRIVATKUNDE = "P";
@@ -52,7 +118,7 @@ public abstract class AbstractKunde implements Serializable {
 	@Id
 	@GeneratedValue
 	@Basic(optional = false)
-	private Long id;
+	private Long id=KEINE_ID;
 	
 	@NotNull(message = "{kunde.nachname.NotNull}")
 	@Size(min = 2, max = 32, message = "{kunde.nachname.size}")
@@ -71,7 +137,6 @@ public abstract class AbstractKunde implements Serializable {
 	private Adresse adresse;
 	
 	
-
 	@OneToMany
 	@JoinColumn(name = "kunde_fk", nullable = false)
 	@OrderColumn(name = "idx", nullable = false)
