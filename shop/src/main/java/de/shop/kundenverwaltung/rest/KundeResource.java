@@ -14,6 +14,7 @@ import static javax.ws.rs.core.MediaType.TEXT_XML;
 import java.net.URI;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -35,7 +36,9 @@ import de.shop.bestellverwaltung.domain.Bestellung;
 import de.shop.bestellverwaltung.rest.BestellungResource;
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.kundenverwaltung.service.KundenService;
+import de.shop.kundenverwaltung.service.KundenService.FetchType;
 import de.shop.util.Mock;
+import de.shop.util.interceptor.Log;
 import de.shop.util.rest.UriHelper;
 import de.shop.util.rest.NotFoundException;
 
@@ -44,6 +47,8 @@ import de.shop.util.rest.NotFoundException;
 @Path("/kunden")
 @Produces({ APPLICATION_JSON, APPLICATION_XML + ";qs=0.75", TEXT_XML + ";qs=0.5" })
 @Consumes
+@RequestScoped
+@Log
 public class KundeResource {
 	public static final String KUNDEN_ID_PATH_PARAM = "kundeId";
 	public static final String KUNDEN_NACHNAME_QUERY_PARAM = "nachname";
@@ -71,7 +76,7 @@ public class KundeResource {
 	@Path("{" +  KUNDEN_ID_PATH_PARAM  + ":[1-9][0-9]*}")
 	@Produces({ TEXT_PLAIN, APPLICATION_JSON })
 	public Response findKundeById(@PathParam(KUNDEN_ID_PATH_PARAM) Long id) {
-		final AbstractKunde kunde = ks.findKundeById(id);
+		final AbstractKunde kunde = ks.findKundeById(id, FetchType.NUR_KUNDE);
 		if (kunde == null) {
 			throw new NotFoundException("Kein Kunde gefunden");
 		}
@@ -164,7 +169,7 @@ public class KundeResource {
 	@Path("{id:[1-9][0-9]*}/bestellungen")
 	public Response findBestellungenByKundeId(@PathParam("id") Long kundeId) {
 		// TODO Anwendungskern statt Mock
-		final AbstractKunde kunde = ks.findKundeById(kundeId);
+		final AbstractKunde kunde = ks.findKundeById(kundeId, FetchType.NUR_KUNDE);
 		// TODO Bestellservice statt Mock 
 		final List<Bestellung> bestellungen = Mock.findBestellungenByKunde(kunde);
 		if (bestellungen.isEmpty()) {
@@ -223,6 +228,7 @@ public class KundeResource {
 	@Path("{id:[1-9][0-9]*}")
 	@Produces
 	public void deleteKunde(@PathParam("id") Long kundeId) {
-		ks.deleteKunde(kundeId);
+		final AbstractKunde kunde = ks.findKundeById(kundeId, FetchType.NUR_KUNDE);
+		ks.deleteKunde(kunde);
 	}
 }

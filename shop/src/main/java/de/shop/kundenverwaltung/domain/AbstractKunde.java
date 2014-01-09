@@ -4,6 +4,17 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -26,30 +37,44 @@ import de.shop.bestellverwaltung.domain.Bestellung;
 @JsonSubTypes({
 	@Type(value = Privatkunde.class, name = AbstractKunde.PRIVATKUNDE),
 	@Type(value = Firmenkunde.class, name = AbstractKunde.FIRMENKUNDE) })
+
+@Entity
+@Table(name="kunde", indexes = @Index(columnList = "nachname"))
 public abstract class AbstractKunde implements Serializable {
 	private static final long serialVersionUID = 7401524595142572933L;
+	
+	private static final String PREFIX = "AbstractKunde.";
+	public static final String GRAPH_BESTELLUNGEN = PREFIX + "bestellungen";
 	
 	public static final String PRIVATKUNDE = "P";
 	public static final String FIRMENKUNDE = "F";
 	
-	//@NotNull
+	@Id
+	@GeneratedValue
+	@Basic(optional = false)
 	private Long id;
 	
 	@NotNull(message = "{kunde.nachname.NotNull}")
 	@Size(min = 2, max = 32, message = "{kunde.nachname.size}")
 	@Pattern(regexp = "[A-ZÄÖÜ][a-zäöüß]+", message = "{kunde.nachname.pattern}")
+	@Column(length = 32, nullable = false)
 	private String nachname;
 	
 	@NotNull(message = "{kunde.email.NotNull}")
 	@Email(message = "{kunde.email.pattern}")
+	@Column(length = 64, nullable = false, unique = true)
 	private String email;
 	
 	@NotNull(message = "{kunde.adresse.NotNull}")
 	@Valid
+	@OneToOne(mappedBy = "kunde")
 	private Adresse adresse;
 	
-	//@NotNull
-	@Valid
+	
+
+	@OneToMany
+	@JoinColumn(name = "kunde_fk", nullable = false)
+	@OrderColumn(name = "idx", nullable = false)
 	@XmlTransient
 	private List<Bestellung> bestellungen;
 	

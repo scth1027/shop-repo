@@ -2,10 +2,12 @@ package de.shop.kundenverwaltung.domain;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
+@Entity
 public class Privatkunde extends AbstractKunde {
 	private static final long serialVersionUID = -3177911520687689458L;
 	

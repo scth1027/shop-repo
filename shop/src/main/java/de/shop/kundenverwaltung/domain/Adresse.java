@@ -2,26 +2,41 @@ package de.shop.kundenverwaltung.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
 
-
+@Entity
+@Table(indexes = @Index(columnList = "plz"))
 public class Adresse implements Serializable {
 	private static final long serialVersionUID = -3029272617931844501L;
 	
-	
+	@Id
+	@GeneratedValue
+	@Basic(optional = false)
 	private Long id;
 	
 	@NotNull(message = "{adresse.plz.NotNull}")
 	@Pattern(regexp = "\\d{5}", message = "{adresse.plz.pattern}")
+	@Column(length = 32)
 	private String plz;
 	
 	@NotNull(message = "{adresse.ort.NotNull}")
 	@Size(min = 2, max = 32, message = "{adresse.ort.size}")
 	private String ort;
 	
+	@OneToOne
+	@JoinColumn(name = "kunde_fk", nullable = false, unique = true)
 	@XmlTransient
 	private AbstractKunde kunde;
 	

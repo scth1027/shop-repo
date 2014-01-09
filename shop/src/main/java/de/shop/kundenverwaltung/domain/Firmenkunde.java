@@ -1,8 +1,10 @@
 package de.shop.kundenverwaltung.domain;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity
 public class Firmenkunde extends AbstractKunde {
 	private static final long serialVersionUID = 6258156986876418100L;
 }
