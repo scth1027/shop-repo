@@ -9,8 +9,10 @@ import javax.validation.constraints.Size;
 
 import de.shop.kundenverwaltung.domain.AbstractKunde;
 import de.shop.util.Mock;
+import de.shop.util.interceptor.Log;
 
 @Dependent
+@Log
 public class KundenService implements Serializable {
 
 	private static final long serialVersionUID = 5326204988915561298L;
