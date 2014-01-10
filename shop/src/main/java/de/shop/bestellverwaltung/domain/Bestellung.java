@@ -42,8 +42,6 @@ import de.shop.kundenverwaltung.domain.Adresse;
 @Table(indexes = {
 	@Index(columnList = "kunde_fk")
 })
-
-
 public class Bestellung implements Serializable {
 	
 	private static final long serialVersionUID = -97562639100824340L;
@@ -75,11 +73,11 @@ public class Bestellung implements Serializable {
 	
 	private boolean status;
 	
-	@Valid
-	@OneToMany(fetch = EAGER, cascade = { PERSIST, REMOVE })
-	@JoinColumn(name = "bestellung_fk", nullable = false)
-	@NotEmpty 
-	private List<Posten> posten;
+//	@Valid
+//	@OneToMany(fetch = EAGER, cascade = { PERSIST, REMOVE })
+//	@JoinColumn(name = "bestellung_fk", nullable = false)
+//	@NotEmpty 
+//	private List<Posten> posten;
 	
 	//Getter & Setter
 	public Long getId() {
@@ -118,12 +116,12 @@ public class Bestellung implements Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	public List<Posten> getPosten() {
-		return posten;
-	}
-	public void setPosten(List<Posten> posten) {
-		this.posten = posten;
-	}
+//	public List<Posten> getPosten() {
+//		return posten;
+//	}
+//	public void setPosten(List<Posten> posten) {
+//		this.posten = posten;
+//	}
 	public URI getKundeUri() {
 		return kundeUri;
 	}
@@ -138,8 +136,7 @@ public class Bestellung implements Serializable {
 	public String toString() {
 		return "Bestellung [id=" + id + ", kunde=" + kunde + ", bestelldatum=" + bestelldatum 
 				+ ", gesamtpreis= " + gesamtpreis + ", lieferadresse="
-				+ lieferadresse + ", status=" + status + ", posten=" 
-				+ posten + "]";
+				+ lieferadresse + ", status=" + status + "]";
 	}
 	
 	@Override
@@ -150,44 +147,11 @@ public class Bestellung implements Serializable {
 		result = prime * result + ((kunde == null) ? 0 : kunde.hashCode());
 		result = prime * result + ((lieferadresse == null) ? 0 : lieferadresse.hashCode());
 		//result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((posten == null) ? 0 : posten.hashCode());
+
 		return result;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Bestellung other = (Bestellung) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} 
-		else if (!id.equals(other.id))
-			return false;
-		if (kunde == null) {
-			if (other.kunde != null)
-				return false;
-		}
-		else if (!kunde.equals(other.kunde))
-			return false;
-		if (lieferadresse == null) {
-			if (other.lieferadresse != null)
-				return false;
-		} 
-		else if (!lieferadresse.equals(other.lieferadresse))
-			return false;
-		if (posten == null) {
-			if (other.posten != null)
-				return false;
-		} 
-		else if (!posten.equals(other.posten))
-			return false;
-		return true;
-	}
+
+
 	
 }

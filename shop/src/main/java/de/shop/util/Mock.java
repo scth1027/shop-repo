@@ -55,7 +55,7 @@ public final class Mock {
 			final Set<HobbyType> hobbies = new HashSet<>();
 			hobbies.add(HobbyType.FUSSBALL);
 			hobbies.add(HobbyType.REITEN);
-			privatkunde.setHobbies(hobbies);
+//			privatkunde.setHobbies(hobbies);
 		}
 		
 		return kunde;
