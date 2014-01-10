@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -143,6 +144,7 @@ public abstract class AbstractKunde implements Serializable {
 	@XmlTransient
 	private List<Bestellung> bestellungen;
 	
+	@Transient
 	private URI bestellungenUri;
 
 	//Getter & Setter
