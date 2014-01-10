@@ -15,14 +15,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
-
+//TODO Kommentare entfernen sobald Artikel implementiert ist	
 //@Entity
 //@Table(indexes = {
 //		@Index(columnList = "bestellung_fk")
 //	})
 //@XmlRootElement
 public class Posten {
-	
+
+//TODO Kommentare entfernen sobald Artikel implementiert ist	
 //	@Id
 //	@GeneratedValue
 	private int id;

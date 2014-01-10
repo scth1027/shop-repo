@@ -72,7 +72,8 @@ public class Bestellung implements Serializable {
 	private Adresse lieferadresse;
 	
 	private boolean status;
-	
+
+//TODO Kommentare entfernen sobald Artikel implementiert ist	
 //	@Valid
 //	@OneToMany(fetch = EAGER, cascade = { PERSIST, REMOVE })
 //	@JoinColumn(name = "bestellung_fk", nullable = false)
@@ -116,6 +117,8 @@ public class Bestellung implements Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
+
+//TODO Kommentare entfernen sobald Artikel implementiert ist	
 //	public List<Posten> getPosten() {
 //		return posten;
 //	}
