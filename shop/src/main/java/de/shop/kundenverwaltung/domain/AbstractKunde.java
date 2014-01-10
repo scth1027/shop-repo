@@ -89,7 +89,7 @@ import de.shop.bestellverwaltung.domain.Bestellung;
 
 
 
-@Table(name="kunde", indexes = @Index(columnList = "nachname"))
+@Table(name = "kunde", indexes = @Index(columnList = "nachname"))
 public abstract class AbstractKunde implements Serializable {
 	private static final long serialVersionUID = 7401524595142572933L;
 	
@@ -119,7 +119,7 @@ public abstract class AbstractKunde implements Serializable {
 	@Id
 	@GeneratedValue
 	@Basic(optional = false)
-	private Long id=KEINE_ID;
+	private Long id = KEINE_ID;
 	
 	@NotNull(message = "{kunde.nachname.NotNull}")
 	@Size(min = 2, max = 32, message = "{kunde.nachname.size}")

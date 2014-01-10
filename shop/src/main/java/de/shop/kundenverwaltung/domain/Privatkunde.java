@@ -1,7 +1,5 @@
 package de.shop.kundenverwaltung.domain;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
 

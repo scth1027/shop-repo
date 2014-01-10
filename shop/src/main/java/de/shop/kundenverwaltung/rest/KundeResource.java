@@ -207,7 +207,7 @@ public class KundeResource {
 			// FIXME JDK 8 hat Lambda-Ausdruecke
 			//kunden.parallelStream()
 			//      .forEach(k -> setStructuralLinks(k, uriInfo));
-			entity = new GenericEntity<List<? extends AbstractKunde>>(kunden){};
+			entity = new GenericEntity<List<? extends AbstractKunde>>(kunden) { } ;
 			links = getTransitionalLinksKunden(kunden, uriInfo);
 		}
 		else if (kunde != null) {
@@ -233,7 +233,7 @@ public class KundeResource {
                               .rel(LAST_LINK)
                               .build();
 		
-		return new Link[] { first, last };
+		return new Link[] {first, last };
 	}
 	
 	@GET
