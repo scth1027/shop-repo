@@ -13,10 +13,10 @@ INSERT INTO kunde (art, id,email, nachname) VALUES ('F',5,'witzig@web.de', 'Witz
 
 
 INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (200,'Karlsruhe','76133','Hansstraﬂe 3',1);
-INSERT INTO adresse (id, ort, plz, kunde_fk) VALUES (201,'Emmendingen','79312','Marktplatz 9',2);
-INSERT INTO adresse (id, ort, plz, kunde_fk) VALUES (202,'Herbolzheim','79336','Am Sportfeld 89',3);
-INSERT INTO adresse (id, ort, plz, kunde_fk) VALUES (203,'Karlsruhe','76133','Rosenweg 7',4);
-INSERT INTO adresse (id, ort, plz, kunde_fk) VALUES (204,'Freiburg','78812','Talstraﬂe 4',5);
+INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (201,'Emmendingen','79312','Marktplatz 9',2);
+INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (202,'Herbolzheim','79336','Am Sportfeld 89',3);
+INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (203,'Karlsruhe','76133','Rosenweg 7',4);
+INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (204,'Freiburg','78812','Talstraﬂe 4',5);
 
 --
 -- bestellung ID 1000-
