@@ -22,3 +22,5 @@ INSERT INTO adresse (id, ort, plz, strasse, kunde_fk) VALUES (204,'Freiburg','78
 -- bestellung ID 1000-
 --
 
+--INSERT INTO bestellung (id, bestelldatum, gesamtpreis, status ,kunde_fk) VALUES (1000, '2011-11-11', 200.10, true, 1)
+

@@ -117,7 +117,7 @@ public final class Mock {
 		adresse.setId(id + 1);
 		adresse.setPlz("12345");
 		adresse.setOrt("Testort");
-		bestellung.setLieferadresse(adresse);
+
 
 
 		

@@ -8,7 +8,7 @@
 	    <jta-data-source>java:jboss/datasources/shopDS</jta-data-source>
 				
 		<!-- Caching von Objekten mit @Cacheable -->
-		<shared-cache-mode>NONE</shared-cache-mode>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<!--
 		-->
 

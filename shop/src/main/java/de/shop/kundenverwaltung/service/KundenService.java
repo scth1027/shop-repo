@@ -36,7 +36,7 @@ public class KundenService implements Serializable {
 		ID
 	}
 	
-	
+	//@Inject
 	private transient EntityManager em;
 
 	@NotNull(message = "{kunde.notFound.id}")

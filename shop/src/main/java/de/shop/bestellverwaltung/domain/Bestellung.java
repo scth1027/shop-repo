@@ -67,9 +67,6 @@ public class Bestellung implements Serializable {
 	@NotNull(message = "{bestellung.gesamtpreis.NotNull}")
 	private BigDecimal gesamtpreis;
 	
-	@NotNull(message = "{bestellung.adresse.NotNull}")
-	@Valid
-	private Adresse lieferadresse;
 	
 	private boolean status;
 
@@ -105,12 +102,7 @@ public class Bestellung implements Serializable {
 	public void setGesamtpreis(BigDecimal gesamtpreis) {
 		this.gesamtpreis = gesamtpreis;
 	}
-	public Adresse getLieferadresse() {
-		return lieferadresse;
-	}
-	public void setLieferadresse(Adresse lieferadresse) {
-		this.lieferadresse = lieferadresse;
-	}
+
 	public boolean isStatus() {
 		return status;
 	}
@@ -138,8 +130,7 @@ public class Bestellung implements Serializable {
 	@Override
 	public String toString() {
 		return "Bestellung [id=" + id + ", kunde=" + kunde + ", bestelldatum=" + bestelldatum 
-				+ ", gesamtpreis= " + gesamtpreis + ", lieferadresse="
-				+ lieferadresse + ", status=" + status + "]";
+				+ ", gesamtpreis= " + gesamtpreis + ", status=" + status + "]";
 	}
 	
 	@Override
@@ -148,7 +139,6 @@ public class Bestellung implements Serializable {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((kunde == null) ? 0 : kunde.hashCode());
-		result = prime * result + ((lieferadresse == null) ? 0 : lieferadresse.hashCode());
 		//result = prime * result + ((status == null) ? 0 : status.hashCode());
 
 		return result;
