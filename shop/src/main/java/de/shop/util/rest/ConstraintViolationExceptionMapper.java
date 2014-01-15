@@ -29,7 +29,7 @@ import java.util.List;
 @Provider
 @ApplicationScoped
 //@Log
-public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {        @Override
+public class ConstraintViolationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {  @Override
         public Response toResponse(ConstraintViolationException exception) {
                 final Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
                 // Rueckgabewert null oder leere Liste? d.h. NOT_FOUND?
@@ -47,7 +47,8 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
                         if (node != null && node.getKind() == RETURN_VALUE) {
                                 final Object invalidValue = violation.getInvalidValue();
                                 // null oder leere Liste?
-                                if (invalidValue == null || (invalidValue instanceof List && ((List<?>) invalidValue).isEmpty())) {
+                                if (invalidValue == null || (invalidValue instanceof List && 
+                                		((List<?>) invalidValue).isEmpty())) {
                                         return Response.status(NOT_FOUND)
                                                          .type(TEXT_PLAIN)
                                                  .entity(violation.getMessage())
