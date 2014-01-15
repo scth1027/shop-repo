@@ -47,8 +47,8 @@ public class ConstraintViolationExceptionMapper implements ExceptionMapper<Const
                         if (node != null && node.getKind() == RETURN_VALUE) {
                                 final Object invalidValue = violation.getInvalidValue();
                                 // null oder leere Liste?
-                                if (invalidValue == null || (invalidValue instanceof List && 
-                                		((List<?>) invalidValue).isEmpty())) {
+                                if (invalidValue == null || (invalidValue instanceof List 
+                                		&& ((List<?>) invalidValue).isEmpty())) {
                                         return Response.status(NOT_FOUND)
                                                          .type(TEXT_PLAIN)
                                                  .entity(violation.getMessage())
