@@ -338,4 +338,3 @@ public class Kunde extends AbstractAuditable implements Serializable {
                 return true;
         }
 }
-

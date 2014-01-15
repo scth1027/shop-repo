@@ -28,7 +28,8 @@ public class KundeDeleteBestellungExceptionMapper implements ExceptionMapper<Kun
         
         @Override
         public Response toResponse(KundeDeleteBestellungException e) {
-                final String msg = messages.getMessage(headers, e.getMessageKey(), e.getKundeId(), e.getAnzahlBestellungen());
+                final String msg = messages.getMessage(headers, e.getMessageKey(), 
+                		e.getKundeId(), e.getAnzahlBestellungen());
                 return Response.status(BAD_REQUEST)
                  .type(TEXT_PLAIN)
                  .entity(msg)

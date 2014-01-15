@@ -38,7 +38,7 @@ public class Messages {
         private transient ResourceBundle defaultBundle;
         
         private transient Map<Locale, ResourceBundle> bundles;
-        private transient Map<String, ResourceBundle> bundlesLanguageStr;         // z.B. "en" als Schluessel auch fuer en_US
+        private transient Map<String, ResourceBundle> bundlesLanguageStr; // z.B. "en" als Schluessel auch fuer en_US
         
         @PostConstruct
         private void postConstruct() {

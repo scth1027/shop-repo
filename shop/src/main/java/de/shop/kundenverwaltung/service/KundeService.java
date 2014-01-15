@@ -148,7 +148,7 @@ public class KundeService implements Serializable {
         @Size(min = 1, message = "{kunde.notFound.nachname}")
         public List<Kunde> findKundenByNachname(String nachname, FetchType fetch) {
                 final TypedQuery<Kunde> query = em.createNamedQuery(Kunde.FIND_KUNDEN_BY_NACHNAME, Kunde.class)
-                                                                                 .setParameter(Kunde.PARAM_KUNDE_NACHNAME, nachname);
+                                                .setParameter(Kunde.PARAM_KUNDE_NACHNAME, nachname);
                 
                 EntityGraph<?> entityGraph;
                 switch (fetch) {

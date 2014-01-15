@@ -23,3 +23,4 @@ public class EmailExistsException extends AbstractKundeServiceException {
                 return MESSAGE_KEY;
         }
 }
+

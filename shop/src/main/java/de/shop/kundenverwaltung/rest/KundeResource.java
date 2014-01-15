@@ -236,7 +236,8 @@ public class KundeResource {
                 }
                 
                 final Response response = Response.ok(new GenericEntity<List<Bestellung>>(bestellungen) { })
-                                                                 .links(getTransitionalLinksBestellungen(bestellungen, kunde, uriInfo))
+                                                                 .links(getTransitionalLinksBestellungen(
+                                                                		 bestellungen, kunde, uriInfo))
                                                                  .build();
                 return response;
         }
@@ -316,7 +317,8 @@ public class KundeResource {
                                 .rel(UPDATE_LINK)
                                 .build();
 
-                final Link remove = Link.fromUri(uriHelper.getUri(KundeResource.class, "deleteKunde", kunde.getId(), uriInfo))
+                final Link remove = Link.fromUri(uriHelper.getUri(KundeResource.class, "deleteKunde",
+                								kunde.getId(), uriInfo))
                                 .rel(REMOVE_LINK)
                                 .build();
                 
